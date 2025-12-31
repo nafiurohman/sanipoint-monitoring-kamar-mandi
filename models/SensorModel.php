@@ -53,8 +53,8 @@ class SensorModel {
                 JOIN sensors s ON sl.sensor_id = s.id
                 JOIN bathrooms b ON s.bathroom_id = b.id
                 ORDER BY sl.recorded_at DESC
-                LIMIT ?";
-        return $this->db->fetchAll($sql, [$limit]);
+                LIMIT " . (int)$limit;
+        return $this->db->fetchAll($sql);
     }
     
     public function getLatestData() {

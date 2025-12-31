@@ -8,12 +8,14 @@ $isAdmin = $auth->hasRole('admin');
 
 // Generate breadcrumbs
 $uri = $_SERVER['REQUEST_URI'];
-$segments = explode('/', trim(str_replace('/sanipoint', '', $uri), '/'));
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+$cleanUri = str_replace($basePath, '', $uri);
+$segments = explode('/', trim($cleanUri, '/'));
 $breadcrumbs = [];
 
 if (!empty($segments[0])) {
     if ($segments[0] === 'admin') {
-        $breadcrumbs[] = ['name' => 'Admin', 'url' => '/sanipoint/admin/dashboard'];
+        $breadcrumbs[] = ['name' => 'Admin', 'url' => $basePath . '/admin/dashboard'];
         if (isset($segments[1])) {
             $pageNames = [
                 'dashboard' => 'Dashboard',
@@ -26,7 +28,7 @@ if (!empty($segments[0])) {
             $breadcrumbs[] = ['name' => $pageNames[$segments[1]] ?? ucfirst($segments[1]), 'url' => null];
         }
     } elseif ($segments[0] === 'karyawan') {
-        $breadcrumbs[] = ['name' => 'Karyawan', 'url' => '/sanipoint/karyawan/dashboard'];
+        $breadcrumbs[] = ['name' => 'Karyawan', 'url' => $basePath . '/karyawan/dashboard'];
         if (isset($segments[1])) {
             $pageNames = [
                 'dashboard' => 'Dashboard',
@@ -74,7 +76,7 @@ if (!empty($segments[0])) {
         <div class="relative">
             <button id="notifications-btn" class="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative">
                 <i class="fas fa-bell text-gray-600 dark:text-gray-400"></i>
-                <span id="notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center hidden">3</span>
+                <span id="notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
             </button>
             
             <!-- Notifications Dropdown -->
@@ -126,7 +128,7 @@ if (!empty($segments[0])) {
                     
                     <div class="border-t border-gray-200 dark:border-gray-700 my-2"></div>
                     
-                    <a href="/sanipoint/logout" class="w-full flex items-center space-x-3 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors">
+                    <a href="<?= $basePath ?>/logout" class="w-full flex items-center space-x-3 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors">
                         <i class="fas fa-sign-out-alt w-4"></i>
                         <span>Logout</span>
                     </a>

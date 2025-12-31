@@ -1,25 +1,22 @@
 <?php
-// Load environment variables
-function loadEnv($path) {
-    if (!file_exists($path)) return;
-    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        list($name, $value) = explode('=', $line, 2);
-        $_ENV[trim($name)] = trim($value);
-    }
-}
+// Application configuration
+define('APP_KEY', 'sanipoint_2024_secure_key_xyz789');
 
-loadEnv(__DIR__ . '/../.env');
+define('TIMEZONE', 'Asia/Jakarta');
 
-// Database configuration
-define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
-define('DB_NAME', $_ENV['DB_NAME'] ?? 'sanipoint_db');
-define('DB_USER', $_ENV['DB_USER'] ?? 'root');
-define('DB_PASS', $_ENV['DB_PASS'] ?? '');
-define('APP_KEY', $_ENV['APP_KEY'] ?? 'default_key');
-define('APP_URL', $_ENV['APP_URL'] ?? 'http://localhost');
-define('TIMEZONE', $_ENV['TIMEZONE'] ?? 'Asia/Jakarta');
+// Database configuration production
+// define('APP_URL', 'https://app-sanipoint.beznlabs.web.id/');
+// define('DB_HOST', 'localhost');
+// define('DB_NAME', 'beznwebi_beznlabs_storage_241204_250305');
+// define('DB_USER', 'beznwebi_beznlabs_storage_241204_250305_user');
+// define('DB_PASS', 'beznlabs_storage_241204_250305_pw');
+
+// Database configuration development
+define('APP_URL', 'http://localhost/sanipoint/');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'sanipoint_db');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 
 // Set timezone
 date_default_timezone_set(TIMEZONE);
@@ -29,13 +26,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // UUID Generator function
-function generateUUID() {
-    return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-        mt_rand(0, 0xffff),
-        mt_rand(0, 0x0fff) | 0x4000,
-        mt_rand(0, 0x3fff) | 0x8000,
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-    );
+if (!function_exists('generateUUID')) {
+    function generateUUID() {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
 }
 ?>

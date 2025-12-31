@@ -11,8 +11,6 @@ class OrderModel {
     
     public function createOrder($user_id, $cart_items) {
         try {
-            $this->db->getConnection()->beginTransaction();
-            
             $productModel = new ProductModel();
             $pointModel = new PointModel();
             
@@ -52,16 +50,14 @@ class OrderModel {
             $order_number = 'ORD' . date('Ymd') . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
             
             // Create order
-            $this->db->insert('orders', [
+            $order_id = $this->db->insert('orders', [
                 'user_id' => $user_id,
                 'order_number' => $order_number,
                 'total_points' => $total_points,
-                'status' => 'pending'
+                'status' => 'completed'
             ]);
             
-            $order_id = $this->db->getConnection()->lastInsertId();
-            
-            // Create order items and update stock
+            // Create order items
             foreach ($order_items as $item) {
                 $this->db->insert('order_items', [
                     'order_id' => $order_id,
@@ -78,57 +74,35 @@ class OrderModel {
             // Deduct points
             $pointModel->deductPoints($user_id, $total_points, 'purchase', $order_id, 'Order: ' . $order_number);
             
-            // Generate QR code
-            $qr_code = $this->generateQRCode($order_id, $order_number);
-            
-            // Update order with QR code
-            $this->db->update('orders', [
-                'qr_code' => $qr_code,
-                'status' => 'completed'
-            ], 'id = ?', [$order_id]);
-            
-            // Save QR code record
-            $this->db->insert('qr_codes', [
-                'order_id' => $order_id,
-                'qr_code' => $qr_code,
-                'expires_at' => date('Y-m-d H:i:s', strtotime('+7 days'))
-            ]);
-            
-            $this->db->getConnection()->commit();
-            
-            // Clear cart
-            unset($_SESSION['cart']);
+            // Log successful order creation
+            error_log('✅ ORDER SUCCESS: Order ' . $order_number . ' created for user ' . $user_id . ' with ' . $total_points . ' points');
             
             return [
                 'success' => true, 
-                'message' => 'Order created successfully',
+                'message' => 'Pembelian berhasil! Order telah dibuat.',
                 'order_id' => $order_id,
                 'order_number' => $order_number,
-                'qr_code' => $qr_code,
-                'total_points' => $total_points
+                'total_points' => $total_points,
+                'order_items' => $order_items
             ];
             
         } catch (Exception $e) {
-            $this->db->getConnection()->rollBack();
+            error_log('Order creation failed: ' . $e->getMessage());
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
     
     public function getUserOrders($user_id, $limit = null) {
-        $sql = "SELECT o.*, 
-                       COUNT(oi.id) as item_count,
-                       qr.is_used as qr_used,
-                       qr.used_at as qr_used_at
+        $sql = "SELECT o.id, o.order_number, o.total_points, o.status, o.created_at, o.received_at, o.cancelled_at,
+                       COUNT(oi.id) as item_count
                 FROM orders o
                 LEFT JOIN order_items oi ON o.id = oi.order_id
-                LEFT JOIN qr_codes qr ON o.id = qr.order_id
                 WHERE o.user_id = ?
-                GROUP BY o.id
+                GROUP BY o.id, o.order_number, o.total_points, o.status, o.created_at, o.received_at, o.cancelled_at
                 ORDER BY o.created_at DESC";
         
         if ($limit) {
-            $sql .= " LIMIT ?";
-            return $this->db->fetchAll($sql, [$user_id, $limit]);
+            $sql .= " LIMIT " . intval($limit);
         }
         
         return $this->db->fetchAll($sql, [$user_id]);
@@ -159,37 +133,133 @@ class OrderModel {
         return $order;
     }
     
-    public function validateQRCode($qr_code) {
-        $qr = $this->db->fetch(
-            "SELECT qr.*, o.order_number, o.total_points, u.full_name as user_name
-             FROM qr_codes qr
-             JOIN orders o ON qr.order_id = o.id
-             JOIN users u ON o.user_id = u.id
-             WHERE qr.qr_code = ? AND qr.is_used = 0 AND qr.expires_at > NOW()",
-            [$qr_code]
-        );
-        
-        if ($qr) {
-            // Mark as used
-            $this->db->update('qr_codes', [
-                'is_used' => 1,
-                'used_at' => date('Y-m-d H:i:s')
-            ], 'id = ?', [$qr['id']]);
+    public function cancelOrder($order_id, $user_id) {
+        try {
+            // Get order details
+            $order = $this->db->fetch(
+                "SELECT * FROM orders WHERE id = ? AND user_id = ? AND status = 'completed'",
+                [$order_id, $user_id]
+            );
+            
+            if (!$order) {
+                throw new Exception('Order not found or cannot be cancelled');
+            }
+            
+            // Get order items
+            $items = $this->db->fetchAll(
+                "SELECT oi.*, p.name as product_name FROM order_items oi 
+                 JOIN products p ON oi.product_id = p.id 
+                 WHERE oi.order_id = ?",
+                [$order_id]
+            );
+            
+            // Restore stock
+            $productModel = new ProductModel();
+            foreach ($items as $item) {
+                $productModel->restoreStock($item['product_id'], $item['quantity']);
+            }
+            
+            // Refund points
+            $pointModel = new PointModel();
+            $pointModel->addPoints($user_id, $order['total_points'], 'refund', $order_id, 'Order cancelled: ' . $order['order_number']);
+            
+            // Update order status
+            $this->db->update('orders', [
+                'status' => 'cancelled',
+                'cancelled_at' => date('Y-m-d H:i:s')
+            ], 'id = ?', [$order_id]);
+            
+            return ['success' => true, 'message' => 'Order cancelled successfully'];
+            
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
         }
-        
-        return $qr;
     }
     
-    private function generateQRCode($order_id, $order_number) {
-        // Simple QR code generation - in production, use a proper QR library
-        $data = [
-            'order_id' => $order_id,
-            'order_number' => $order_number,
-            'timestamp' => time(),
-            'hash' => hash('sha256', $order_id . $order_number . APP_KEY)
-        ];
+    public function confirmReceived($order_id, $user_id) {
+        try {
+            // Verify order belongs to user and is completed
+            $order = $this->db->fetch(
+                "SELECT * FROM orders WHERE id = ? AND user_id = ? AND status = 'completed' AND received_at IS NULL",
+                [$order_id, $user_id]
+            );
+            
+            if (!$order) {
+                return ['success' => false, 'message' => 'Order not found or already confirmed'];
+            }
+            
+            // Update received_at timestamp (status stays 'completed')
+            $this->db->update('orders', [
+                'received_at' => date('Y-m-d H:i:s')
+            ], 'id = ?', [$order_id]);
+            
+            return ['success' => true, 'message' => 'Konfirmasi penerimaan barang berhasil'];
+            
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getAllOrdersWithFilters($status = '', $date = '', $employee = '') {
+        $sql = "SELECT o.*, u.full_name as user_name, COUNT(oi.id) as item_count,
+                       o.received_at, o.cancelled_at
+                FROM orders o
+                JOIN users u ON o.user_id = u.id
+                LEFT JOIN order_items oi ON o.id = oi.order_id
+                WHERE 1=1";
         
-        return base64_encode(json_encode($data));
+        $params = [];
+        
+        if ($status) {
+            if ($status === 'pending') {
+                $sql .= " AND o.status = 'completed' AND o.received_at IS NULL";
+            } elseif ($status === 'received') {
+                $sql .= " AND o.status = 'completed' AND o.received_at IS NOT NULL";
+            } else {
+                $sql .= " AND o.status = ?";
+                $params[] = $status;
+            }
+        }
+        
+        if ($date) {
+            $sql .= " AND DATE(o.created_at) = ?";
+            $params[] = $date;
+        }
+        
+        if ($employee) {
+            $sql .= " AND o.user_id = ?";
+            $params[] = $employee;
+        }
+        
+        $sql .= " GROUP BY o.id ORDER BY o.created_at DESC";
+        
+        return $this->db->fetchAll($sql, $params);
+    }
+    
+    public function getTransactionStats() {
+        $stats = [];
+        
+        $stats['total_orders'] = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM orders WHERE status IN ('completed', 'cancelled')"
+        )['count'];
+        
+        $stats['pending_pickup'] = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM orders WHERE status = 'completed' AND received_at IS NULL"
+        )['count'];
+        
+        $stats['received'] = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM orders WHERE status = 'completed' AND received_at IS NOT NULL"
+        )['count'];
+        
+        $stats['cancelled'] = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM orders WHERE status = 'cancelled'"
+        )['count'];
+        
+        $stats['total_points'] = $this->db->fetch(
+            "SELECT COALESCE(SUM(total_points), 0) as total FROM orders WHERE status = 'completed'"
+        )['total'];
+        
+        return $stats;
     }
     
     public function getOrderStats() {

@@ -38,7 +38,7 @@ ob_start();
     
     <!-- Quick Actions -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <a href="/karyawan/marketplace" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+        <a href="marketplace" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <div class="flex items-center">
                 <div class="p-3 bg-green-100 rounded-lg">
                     <i class="fas fa-shopping-cart text-green-600 text-2xl"></i>
@@ -50,7 +50,7 @@ ob_start();
             </div>
         </a>
         
-        <a href="/karyawan/transfer" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+        <a href="transfer" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <div class="flex items-center">
                 <div class="p-3 bg-purple-100 rounded-lg">
                     <i class="fas fa-exchange-alt text-purple-600 text-2xl"></i>
@@ -62,7 +62,7 @@ ob_start();
             </div>
         </a>
         
-        <a href="/karyawan/poin" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+        <a href="poin" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <div class="flex items-center">
                 <div class="p-3 bg-blue-100 rounded-lg">
                     <i class="fas fa-history text-blue-600 text-2xl"></i>

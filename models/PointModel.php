@@ -93,18 +93,17 @@ class PointModel {
         }
     }
     
-    public function transferPoints($from_user_id, $to_employee_code, $amount, $description = null) {
+    public function transferPoints($from_user_id, $to_user_id, $amount, $description = null) {
         try {
             $this->db->getConnection()->beginTransaction();
             
             // Find recipient user
-            $userModel = new UserModel();
-            $to_user = $userModel->findByEmployeeCode($to_employee_code);
+            $to_user = $this->db->fetch("SELECT * FROM users WHERE id = ? AND role = 'karyawan' AND is_active = 1", [$to_user_id]);
             if (!$to_user) {
                 throw new Exception('Employee not found');
             }
             
-            if ($from_user_id == $to_user['id']) {
+            if ($from_user_id == $to_user_id) {
                 throw new Exception('Cannot transfer to yourself');
             }
             
@@ -114,7 +113,7 @@ class PointModel {
                 throw new Exception('Insufficient points');
             }
             
-            $to_points = $this->getUserPoints($to_user['id']);
+            $to_points = $this->getUserPoints($to_user_id);
             
             // Update sender
             $new_from_balance = $from_points['current_balance'] - $amount;
@@ -128,7 +127,7 @@ class PointModel {
             $this->db->update('points', [
                 'current_balance' => $new_to_balance,
                 'total_earned' => $to_points['total_earned'] + $amount
-            ], 'user_id = ?', [$to_user['id']]);
+            ], 'user_id = ?', [$to_user_id]);
             
             // Record transactions
             $this->db->insert('point_transactions', [
@@ -137,12 +136,12 @@ class PointModel {
                 'amount' => $amount,
                 'balance_after' => $new_from_balance,
                 'reference_type' => 'transfer',
-                'to_user_id' => $to_user['id'],
+                'to_user_id' => $to_user_id,
                 'description' => $description
             ]);
             
             $this->db->insert('point_transactions', [
-                'user_id' => $to_user['id'],
+                'user_id' => $to_user_id,
                 'transaction_type' => 'transfer_in',
                 'amount' => $amount,
                 'balance_after' => $new_to_balance,
@@ -161,6 +160,7 @@ class PointModel {
     }
     
     public function getRecentTransactions($user_id, $limit = 10) {
+        $limit = (int)$limit; // Ensure it's an integer
         $sql = "SELECT pt.*, 
                        fu.full_name as from_user_name,
                        tu.full_name as to_user_name
@@ -169,8 +169,8 @@ class PointModel {
                 LEFT JOIN users tu ON pt.to_user_id = tu.id
                 WHERE pt.user_id = ?
                 ORDER BY pt.created_at DESC
-                LIMIT ?";
-        return $this->db->fetchAll($sql, [$user_id, $limit]);
+                LIMIT $limit";
+        return $this->db->fetchAll($sql, [$user_id]);
     }
     
     public function getAllTransactions($user_id) {
@@ -206,6 +206,15 @@ class PointModel {
                 FROM cleaning_logs 
                 WHERE user_id = ? AND status = 'completed'";
         return $this->db->fetch($sql, [$user_id]);
+    }
+    
+    public function getCleaningHistory($user_id) {
+        $sql = "SELECT cl.*, b.name as bathroom_name
+                FROM cleaning_logs cl
+                JOIN bathrooms b ON cl.bathroom_id = b.id
+                WHERE cl.user_id = ?
+                ORDER BY cl.created_at DESC";
+        return $this->db->fetchAll($sql, [$user_id]);
     }
 }
 ?>

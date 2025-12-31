@@ -1,22 +1,23 @@
 <?php
 class Database {
     private static $instance = null;
-    private $connection;
+    private $pdo = null;
     
     private function __construct() {
+        $this->initLocalDatabase();
+    }
+    
+    private function initLocalDatabase() {
         try {
-            $this->connection = new PDO(
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
-                DB_USER,
-                DB_PASS,
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false
-                ]
-            );
+            $host = DB_HOST;
+            $dbname = DB_NAME;
+            $username = DB_USER;
+            $password = DB_PASS;
+            
+            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
+            throw new Exception('Database connection failed: ' . $e->getMessage());
         }
     }
     
@@ -28,43 +29,98 @@ class Database {
     }
     
     public function getConnection() {
-        return $this->connection;
+        return $this->pdo;
     }
     
     public function query($sql, $params = []) {
-        $stmt = $this->connection->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
     
     public function fetch($sql, $params = []) {
-        return $this->query($sql, $params)->fetch();
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
     public function fetchAll($sql, $params = []) {
-        return $this->query($sql, $params)->fetchAll();
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function insert($table, $data) {
-        // Auto-generate UUID for id field if not provided
         if (!isset($data['id'])) {
-            $data['id'] = generateUUID();
+            $data['id'] = $this->generateUUID();
         }
         
         $columns = implode(',', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
-        $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
-        $stmt = $this->query($sql, $data);
-        return $data['id']; // Return the UUID
+        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+        return $data['id'];
     }
     
     public function update($table, $data, $where, $whereParams = []) {
-        $set = [];
+        $setParts = [];
         foreach ($data as $key => $value) {
-            $set[] = "{$key} = :{$key}";
+            $setParts[] = "$key = :$key";
         }
-        $sql = "UPDATE {$table} SET " . implode(', ', $set) . " WHERE {$where}";
-        return $this->query($sql, array_merge($data, $whereParams));
+        $setClause = implode(', ', $setParts);
+        
+        $sql = "UPDATE $table SET $setClause WHERE $where";
+        $stmt = $this->pdo->prepare($sql);
+        
+        $allParams = array_merge($data, $whereParams);
+        $stmt->execute($allParams);
+        
+        return $stmt->rowCount() > 0;
+    }
+    
+    public function execute($sql, $params = []) {
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    }
+    
+    private function generateUUID() {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
+    
+    public function beginTransaction() {
+        return $this->pdo->beginTransaction();
+    }
+    
+    public function commit() {
+        return $this->pdo->commit();
+    }
+    
+    public function rollBack() {
+        return $this->pdo->rollBack();
+    }
+    
+    public function inTransaction() {
+        return $this->pdo->inTransaction();
+    }
+}
+
+if (!function_exists('generateUUID')) {
+    function generateUUID() {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 }
 ?>

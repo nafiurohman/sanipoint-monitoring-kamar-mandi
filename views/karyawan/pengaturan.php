@@ -215,28 +215,60 @@ document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         
+        // DEBUG: Log form data
+        console.log('=== FORM SUBMIT DEBUG ===');
+        console.log('Form ID:', form.id);
+        console.log('Action:', formData.get('action'));
+        console.log('CSRF Token:', formData.get('csrf_token'));
+        
+        if (form.id.includes('pin')) {
+            console.log('Current Password:', formData.get('current_password') ? 'PROVIDED' : 'MISSING');
+            console.log('New PIN:', formData.get('new_pin') ? 'PROVIDED' : 'MISSING');
+            console.log('Confirm PIN:', formData.get('confirm_pin') ? 'PROVIDED' : 'MISSING');
+            console.log('PIN Match:', formData.get('new_pin') === formData.get('confirm_pin'));
+        }
+        
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
+        
+        console.log('Sending request to:', '/sanipoint/karyawan/pengaturan');
         
         fetch('/sanipoint/karyawan/pengaturan', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                showAlert(successMessage, 'success');
-                if (form.id.includes('pin') || form.id.includes('password')) {
-                    form.reset();
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            return response.text();
+        })
+        .then(text => {
+            console.log('Raw response:', text);
+            try {
+                const data = JSON.parse(text);
+                console.log('Parsed JSON:', data);
+                
+                if (data.success) {
+                    console.log('SUCCESS:', successMessage);
+                    showAlert(successMessage, 'success');
+                    if (form.id.includes('pin') || form.id.includes('password')) {
+                        form.reset();
+                    }
+                    if (form.id.includes('create-pin')) {
+                        setTimeout(() => location.reload(), 1500);
+                    }
+                } else {
+                    console.log('ERROR:', data.message);
+                    showAlert(data.message || 'Terjadi kesalahan', 'error');
                 }
-                if (form.id.includes('create-pin')) {
-                    setTimeout(() => location.reload(), 1500);
-                }
-            } else {
-                showAlert(data.message || 'Terjadi kesalahan', 'error');
+            } catch (e) {
+                console.error('JSON Parse Error:', e);
+                console.log('Response is not JSON, might be HTML error page');
+                showAlert('Server error - check console for details', 'error');
             }
         })
         .catch(error => {
+            console.error('Network Error:', error);
             showAlert('Terjadi kesalahan jaringan', 'error');
         })
         .finally(() => {

@@ -12,6 +12,9 @@ CREATE TABLE users (
     phone VARCHAR(20),
     role ENUM('admin', 'karyawan') NOT NULL,
     employee_code VARCHAR(20) UNIQUE,
+    pin VARCHAR(255) NULL,
+    pin_created_at TIMESTAMP NULL,
+    last_password_change TIMESTAMP NULL,
     theme ENUM('light', 'dark', 'system') DEFAULT 'system',
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -225,9 +228,9 @@ CREATE TABLE system_settings (
 INSERT INTO users (id, username, password, full_name, role, employee_code) VALUES 
 ('550e8400-e29b-41d4-a716-446655440000', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'System Administrator', 'admin', 'ADM001');
 
--- Insert demo karyawan user
-INSERT INTO users (id, username, password, full_name, role, employee_code, email, phone) VALUES 
-('550e8400-e29b-41d4-a716-446655440001', 'karyawan1', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Budi Santoso', 'karyawan', 'EMP001', 'budi@example.com', '081234567890');
+-- Insert demo karyawan user with PIN
+INSERT INTO users (id, username, password, full_name, role, employee_code, email, phone, pin, pin_created_at) VALUES 
+('550e8400-e29b-41d4-a716-446655440001', 'karyawan1', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Budi Santoso', 'karyawan', 'EMP001', 'budi@example.com', '081234567890', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW());
 
 -- Insert default system settings
 INSERT INTO system_settings (id, setting_key, setting_value, description) VALUES

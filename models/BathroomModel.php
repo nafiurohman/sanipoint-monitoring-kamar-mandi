@@ -24,13 +24,15 @@ class BathroomModel {
     }
     
     public function count() {
-        return $this->db->fetch("SELECT COUNT(*) as count FROM bathrooms WHERE is_active = 1")['count'];
+        $result = $this->db->fetch("SELECT COUNT(*) as count FROM bathrooms WHERE is_active = 1");
+        return $result ? (int)$result['count'] : 0;
     }
     
     public function getCleaningCountToday() {
         $sql = "SELECT COUNT(*) as count FROM cleaning_logs 
                 WHERE DATE(created_at) = CURDATE() AND status = 'completed'";
-        return $this->db->fetch($sql)['count'];
+        $result = $this->db->fetch($sql);
+        return $result ? (int)$result['count'] : 0;
     }
     
     public function getRecentActivities($limit = 10) {
@@ -39,8 +41,8 @@ class BathroomModel {
                 JOIN bathrooms b ON cl.bathroom_id = b.id
                 JOIN users u ON cl.user_id = u.id
                 ORDER BY cl.created_at DESC
-                LIMIT ?";
-        return $this->db->fetchAll($sql, [$limit]);
+                LIMIT " . (int)$limit;
+        return $this->db->fetchAll($sql);
     }
     
     public function create($data) {
@@ -87,6 +89,43 @@ class BathroomModel {
         } catch (Exception $e) {
             return ['success' => false, 'message' => 'Failed to update bathroom'];
         }
+    }
+    
+    public function delete($id) {
+        try {
+            // Check if bathroom has any cleaning logs or sensor data
+            $hasActivity = $this->db->fetch(
+                "SELECT COUNT(*) as count FROM cleaning_logs WHERE bathroom_id = ?", 
+                [$id]
+            )['count'] > 0;
+            
+            if ($hasActivity) {
+                // Soft delete - set is_active to false
+                $this->db->update('bathrooms', ['is_active' => 0], 'id = ?', [$id]);
+                return ['success' => true, 'message' => 'Bathroom deactivated successfully'];
+            } else {
+                // Hard delete if no activity
+                $this->db->getConnection()->beginTransaction();
+                
+                // Delete related records first
+                $this->db->execute("DELETE FROM sensors WHERE bathroom_id = ?", [$id]);
+                $this->db->execute("DELETE FROM visitor_counter WHERE bathroom_id = ?", [$id]);
+                $this->db->execute("DELETE FROM usage_logs WHERE bathroom_id = ?", [$id]);
+                $this->db->execute("DELETE FROM bathrooms WHERE id = ?", [$id]);
+                
+                $this->db->getConnection()->commit();
+                return ['success' => true, 'message' => 'Bathroom deleted successfully'];
+            }
+        } catch (Exception $e) {
+            if ($this->db->getConnection()->inTransaction()) {
+                $this->db->getConnection()->rollBack();
+            }
+            return ['success' => false, 'message' => 'Failed to delete bathroom'];
+        }
+    }
+    
+    public function getById($id) {
+        return $this->db->fetch("SELECT * FROM bathrooms WHERE id = ?", [$id]);
     }
     
     public function updateVisitorCount($bathroom_id, $count) {
@@ -215,6 +254,116 @@ class BathroomModel {
                 GROUP BY DATE(created_at)
                 ORDER BY date DESC";
         return $this->db->fetchAll($sql);
+    }
+    
+    public function getCleaningLogs($user_id) {
+        $sql = "SELECT cl.*, b.name as bathroom_name
+                FROM cleaning_logs cl
+                JOIN bathrooms b ON cl.bathroom_id = b.id
+                WHERE cl.user_id = ?
+                ORDER BY cl.created_at DESC
+                LIMIT 20";
+        return $this->db->fetchAll($sql, [$user_id]);
+    }
+    
+    public function getRecentSensorData() {
+        $sql = "SELECT sl.*, s.sensor_type, s.sensor_code, b.name as bathroom_name
+                FROM sensor_logs sl
+                JOIN sensors s ON sl.sensor_id = s.id
+                JOIN bathrooms b ON s.bathroom_id = b.id
+                WHERE sl.recorded_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
+                ORDER BY sl.recorded_at DESC
+                LIMIT 50";
+        return $this->db->fetchAll($sql);
+    }
+    
+    public function getLatestSensorReadings() {
+        $sql = "SELECT 
+                    b.id as bathroom_id,
+                    b.name as bathroom_name,
+                    s.sensor_type,
+                    sl.value,
+                    sl.unit,
+                    sl.recorded_at,
+                    ROW_NUMBER() OVER (PARTITION BY b.id, s.sensor_type ORDER BY sl.recorded_at DESC) as rn
+                FROM bathrooms b
+                JOIN sensors s ON b.id = s.bathroom_id
+                LEFT JOIN sensor_logs sl ON s.id = sl.sensor_id
+                WHERE b.is_active = 1 AND s.is_active = 1
+                ORDER BY b.id, s.sensor_type";
+        
+        $all_readings = $this->db->fetchAll($sql);
+        
+        // Filter to get only the latest reading for each sensor type per bathroom
+        $latest_readings = [];
+        foreach ($all_readings as $reading) {
+            if ($reading['rn'] == 1) {
+                $latest_readings[] = $reading;
+            }
+        }
+        
+        return $latest_readings;
+    }
+    
+    public function getUsageLogs($limit = 20) {
+        $sql = "SELECT ul.*, b.name as bathroom_name, u.full_name as user_name
+                FROM usage_logs ul
+                JOIN bathrooms b ON ul.bathroom_id = b.id
+                LEFT JOIN users u ON ul.user_id = u.id
+                ORDER BY ul.waktu DESC
+                LIMIT " . (int)$limit;
+        return $this->db->fetchAll($sql);
+    }
+    
+    public function getIoTStatus() {
+        // Get current status of both toilets with latest sensor data
+        $sql = "SELECT 
+                    b.id,
+                    b.name,
+                    b.location,
+                    b.current_visitors,
+                    b.max_visitors,
+                    b.status,
+                    b.last_cleaned,
+                    b.updated_at,
+                    (
+                        SELECT sl.value 
+                        FROM sensor_logs sl 
+                        JOIN sensors s ON sl.sensor_id = s.id 
+                        WHERE s.bathroom_id = b.id AND s.sensor_type = 'mq135' 
+                        ORDER BY sl.recorded_at DESC LIMIT 1
+                    ) as gas_level,
+                    (
+                        SELECT sl.recorded_at 
+                        FROM sensor_logs sl 
+                        JOIN sensors s ON sl.sensor_id = s.id 
+                        WHERE s.bathroom_id = b.id AND s.sensor_type = 'mq135' 
+                        ORDER BY sl.recorded_at DESC LIMIT 1
+                    ) as gas_last_update,
+                    (
+                        SELECT COUNT(*) 
+                        FROM cleaning_logs cl 
+                        WHERE cl.bathroom_id = b.id AND cl.status = 'in_progress'
+                    ) as is_being_cleaned
+                FROM bathrooms b 
+                WHERE b.is_active = 1 
+                ORDER BY b.id";
+        return $this->db->fetchAll($sql);
+    }
+    
+    public function logUsage($bathroom_id, $uid, $user_id, $action_type, $keterangan) {
+        try {
+            $this->db->insert('usage_logs', [
+                'bathroom_id' => $bathroom_id,
+                'uid_pengakses' => $uid,
+                'user_id' => $user_id,
+                'action_type' => $action_type,
+                'keterangan' => $keterangan
+            ]);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
 ?>

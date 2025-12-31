@@ -8,7 +8,7 @@ ob_start();
             <h1 class="text-3xl font-bold text-gray-900">Manajemen Produk</h1>
             <p class="text-gray-600">Kelola produk marketplace untuk penukaran poin</p>
         </div>
-        <button data-modal="add-product-modal" class="btn btn-primary">
+        <button onclick="newProduct()" class="btn btn-primary">
             <i class="fas fa-plus mr-2"></i>Tambah Produk
         </button>
     </div>
@@ -74,20 +74,22 @@ ob_start();
     </div>
 </div>
 
-<!-- Add Product Modal -->
-<div id="add-product-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+<!-- Product Modal -->
+<div id="productModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
     <div class="bg-white rounded-lg p-6 w-full max-w-md">
-        <h3 class="text-lg font-semibold mb-4">Tambah Produk Baru</h3>
-        <form class="ajax-form" action="/sanipoint/admin/produk" method="POST" data-reload="true">
+        <h3 id="productModalTitle" class="text-lg font-semibold mb-4">Tambah Produk Baru</h3>
+        <form id="productForm" method="POST">
             <input type="hidden" name="action" value="create">
+            <input type="hidden" name="csrf_token" value="<?= Security::generateCSRFToken() ?>">
+            <input type="hidden" id="product_id" name="id" value="">
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Produk</label>
-                    <input type="text" name="name" required class="input">
+                    <input type="text" id="product_name" name="name" required class="input">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <select name="category_id" required class="input">
+                    <select id="product_category_id" name="category_id" required class="input">
                         <option value="">Pilih Kategori</option>
                         <?php foreach ($categories as $category): ?>
                             <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option>
@@ -96,19 +98,23 @@ ob_start();
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                    <textarea name="description" class="input" rows="3"></textarea>
+                    <textarea id="product_description" name="description" class="input" rows="3"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Harga Poin</label>
-                    <input type="number" name="price_points" required class="input" min="1">
+                    <input type="number" id="product_price_points" name="price_points" required class="input" min="1">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Stok</label>
-                    <input type="number" name="stock" required class="input" min="0">
+                    <input type="number" id="product_stock" name="stock" required class="input" min="0">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">URL Gambar (Opsional)</label>
+                    <input type="url" id="product_image_url" name="image_url" class="input">
                 </div>
             </div>
             <div class="flex justify-end space-x-3 mt-6">
-                <button type="button" class="modal-close btn btn-secondary">Batal</button>
+                <button type="button" onclick="closeModal('productModal')" class="btn btn-secondary">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>

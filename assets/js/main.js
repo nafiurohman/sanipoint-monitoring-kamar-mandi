@@ -18,6 +18,9 @@ class SaniPoint {
         const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         if (token) {
             this.csrfToken = token;
+            console.log('CSRF token loaded:', token.substring(0, 10) + '...');
+        } else {
+            console.error('CSRF token not found in meta tag');
         }
     }
     
@@ -26,6 +29,7 @@ class SaniPoint {
         document.addEventListener('submit', (e) => {
             if (e.target.classList.contains('ajax-form')) {
                 e.preventDefault();
+                console.log('Ajax form submitted:', e.target);
                 this.handleAjaxForm(e.target);
             }
         });
@@ -123,46 +127,136 @@ class SaniPoint {
     }
     
     async handleAjaxForm(form) {
+        console.log('=== AJAX FORM SUBMISSION START ===');
+        console.log('Form:', form);
+        console.log('Form ID:', form.id);
+        console.log('Form classes:', form.className);
+        
+        // Special logging for transfer forms
+        if (form.id === 'transfer-form' || window.location.pathname.includes('transfer')) {
+            console.log('🔄 TRANSFER FORM DETECTED');
+        }
+        
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn?.innerHTML;
         
+        console.log('Submit button found:', !!submitBtn);
+        console.log('Original button text:', originalText);
+        
         try {
-            // Show loading state
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...';
+                console.log('Button disabled and loading state applied');
             }
             
             const formData = new FormData(form);
             formData.append('csrf_token', this.csrfToken);
             
-            const response = await fetch(form.action, {
+            console.log('=== FORM DATA ANALYSIS ===');
+            for (let [key, value] of formData.entries()) {
+                if (key.includes('pin') || key.includes('password')) {
+                    console.log(key + ':', value ? 'PROVIDED (' + value.length + ' chars)' : 'EMPTY');
+                } else {
+                    console.log(key + ':', value);
+                }
+            }
+            
+            // Use current page URL for form submission
+            const actionUrl = window.location.pathname;
+            console.log('Submission URL:', actionUrl);
+            console.log('Full URL:', window.location.href);
+            
+            // Special transfer logging
+            if (form.id === 'transfer-form' || window.location.pathname.includes('transfer')) {
+                console.log('🔄 TRANSFER SPECIFIC DATA:');
+                console.log('- To User ID:', formData.get('to_user_id'));
+                console.log('- Amount:', formData.get('amount'));
+                console.log('- PIN provided:', formData.get('pin') ? 'YES' : 'NO');
+                console.log('- Description:', formData.get('description') || 'None');
+            }
+            
+            console.log('Sending fetch request...');
+            const response = await fetch(actionUrl, {
                 method: 'POST',
                 body: formData
             });
             
-            const result = await response.json();
+            console.log('=== RESPONSE ANALYSIS ===');
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+            console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const responseText = await response.text();
+            console.log('Raw response text:', responseText);
+            console.log('Response length:', responseText.length);
+            
+            let result;
+            try {
+                result = JSON.parse(responseText);
+                console.log('=== PARSED JSON RESULT ===');
+                console.log('Success:', result.success);
+                console.log('Message:', result.message);
+                console.log('Full result:', result);
+                
+                // Special transfer logging
+                if (form.id === 'transfer-form' || window.location.pathname.includes('transfer')) {
+                    console.log('🔄 TRANSFER RESULT:', result.success ? '✅ SUCCESS' : '❌ FAILED');
+                    if (!result.success) {
+                        console.log('🔄 TRANSFER ERROR:', result.message);
+                    }
+                }
+            } catch (parseError) {
+                console.error('=== JSON PARSE ERROR ===');
+                console.error('Parse error:', parseError);
+                console.log('Response is not valid JSON, might be HTML error page');
+                throw new Error('Server returned invalid JSON: ' + responseText.substring(0, 200));
+            }
             
             if (result.success) {
-                this.showToast(result.message, 'success');
+                console.log('=== SUCCESS HANDLING ===');
+                window.showToast(result.message, 'success');
+                
+                if (result.credentials) {
+                    console.log('Credentials received:', result.credentials);
+                    this.showCredentials(result.credentials);
+                }
+                
                 if (form.hasAttribute('data-reload')) {
-                    setTimeout(() => location.reload(), 1000);
+                    console.log('Form has data-reload attribute, will reload in 2 seconds');
+                    setTimeout(() => location.reload(), 2000);
+                } else if (form.id === 'transfer-form') {
+                    console.log('🔄 Transfer successful, will reload in 1.5 seconds');
+                    setTimeout(() => location.reload(), 1500);
                 }
                 this.closeModal();
                 form.reset();
+                console.log('Form reset and modal closed');
             } else {
-                this.showToast(result.message, 'error');
+                console.log('=== FAILURE HANDLING ===');
+                console.log('Error message:', result.message);
+                console.log('Errors object:', result.errors);
+                window.showToast(result.message, 'error');
                 this.displayFormErrors(form, result.errors);
             }
         } catch (error) {
-            this.showToast('Terjadi kesalahan sistem', 'error');
-            console.error('Form submission error:', error);
+            console.error('=== AJAX FORM ERROR ===');
+            console.error('Error type:', error.constructor.name);
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+            window.showToast('Terjadi kesalahan: ' + error.message, 'error');
         } finally {
-            // Reset button state
+            console.log('=== CLEANUP PHASE ===');
             if (submitBtn && originalText) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
+                console.log('Button state restored');
             }
+            console.log('=== AJAX FORM SUBMISSION END ===\n');
         }
     }
     
@@ -211,16 +305,6 @@ class SaniPoint {
         });
     }
     
-    showToast(message, type = 'info', duration = 5000) {
-        if (window.themeManager) {
-            const toast = window.themeManager.createToast(message, type, duration);
-            window.themeManager.showToast(toast);
-        } else {
-            // Fallback notification
-            alert(message);
-        }
-    }
-    
     showTooltip(element, text) {
         const tooltip = document.createElement('div');
         tooltip.id = 'tooltip';
@@ -251,7 +335,8 @@ class SaniPoint {
         button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Adding...';
         
         try {
-            const response = await fetch('/sanipoint/karyawan/marketplace', {
+            const basePath = window.basePath || '';
+            const response = await fetch(basePath + '/karyawan/marketplace', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -267,7 +352,7 @@ class SaniPoint {
             const result = await response.json();
             
             if (result.success) {
-                this.showToast('Produk ditambahkan ke keranjang', 'success');
+                window.showToast('Produk ditambahkan ke keranjang', 'success');
                 this.updateCartCount();
                 
                 // Add visual feedback
@@ -283,7 +368,7 @@ class SaniPoint {
                 throw new Error(result.message);
             }
         } catch (error) {
-            this.showToast(error.message || 'Gagal menambahkan ke keranjang', 'error');
+            window.showToast(error.message || 'Gagal menambahkan ke keranjang', 'error');
             button.innerHTML = originalText;
             button.disabled = false;
         }
@@ -312,7 +397,8 @@ class SaniPoint {
     
     async updateRealtimeData() {
         try {
-            const response = await fetch('/sanipoint/api/realtime-status');
+            const basePath = window.basePath || '';
+            const response = await fetch(basePath + '/api/realtime-status');
             const data = await response.json();
             
             this.updateBathroomStatus(data.bathrooms);
@@ -367,6 +453,25 @@ class SaniPoint {
             'maintenance': 'Maintenance'
         };
         return statusMap[status] || status;
+    }
+    
+    showCredentials(credentials) {
+        document.getElementById('cred-username').textContent = credentials.username;
+        document.getElementById('cred-code').textContent = credentials.employee_code;
+        document.getElementById('cred-password').textContent = credentials.password;
+        
+        const modal = document.getElementById('credentials-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }
+}
+
+// Global function for closing credentials modal
+function closeCredentialsModal() {
+    const modal = document.getElementById('credentials-modal');
+    if (modal) {
+        modal.classList.add('hidden');
     }
 }
 

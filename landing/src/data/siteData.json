@@ -1,0 +1,152 @@
+{
+  "seo": {
+    "title": "SANIPOINT - Sistem Monitoring Kebersihan IoT",
+    "description": "Sistem monitoring kebersihan kamar mandi minimarket berbasis IoT dengan reward poin untuk karyawan. Tingkatkan kebersihan dengan teknologi cerdas.",
+    "keywords": ["IoT", "monitoring kebersihan", "kamar mandi", "reward poin", "minimarket", "sensor", "real-time"]
+  },
+  "brand": {
+    "name": "SANIPOINT",
+    "tagline": "Smart Bathroom Monitoring System",
+    "logo": "🚿"
+  },
+  "hero": {
+    "title": "Revolusi Kebersihan dengan Teknologi IoT",
+    "subtitle": "Sistem monitoring kamar mandi cerdas dengan reward poin untuk karyawan. Tingkatkan kebersihan, motivasi tim, dan efisiensi operasional.",
+    "cta": {
+      "primary": "Mulai Sekarang",
+      "secondary": "Lihat Demo"
+    },
+    "stats": [
+      { "value": "99.9%", "label": "Uptime Sistem" },
+      { "value": "500+", "label": "Sensor Aktif" },
+      { "value": "10K+", "label": "Poin Didistribusikan" },
+      { "value": "50+", "label": "Lokasi Terhubung" }
+    ]
+  },
+  "features": {
+    "title": "Fitur Unggulan",
+    "subtitle": "Solusi lengkap untuk monitoring kebersihan modern",
+    "items": [
+      {
+        "icon": "LayoutDashboard",
+        "title": "Admin Dashboard",
+        "description": "Real-time monitoring, manajemen karyawan, laporan analitik komprehensif, dan kontrol penuh sistem dalam satu dashboard."
+      },
+      {
+        "icon": "Wallet",
+        "title": "E-Wallet Poin",
+        "description": "Sistem poin digital dengan riwayat transaksi, transfer antar karyawan, dan marketplace penukaran reward."
+      },
+      {
+        "icon": "Cpu",
+        "title": "Integrasi IoT",
+        "description": "Sensor MQ-135 untuk kualitas udara, IR untuk penghitung pengunjung, dan RFID untuk validasi pembersihan."
+      },
+      {
+        "icon": "TrendingUp",
+        "title": "Analitik Performa",
+        "description": "Laporan mendalam tentang aktivitas pembersihan, distribusi poin, dan tren kebersihan lokasi."
+      },
+      {
+        "icon": "Shield",
+        "title": "Keamanan Tinggi",
+        "description": "Proteksi CSRF, enkripsi password bcrypt, validasi input, dan session management yang aman."
+      },
+      {
+        "icon": "Smartphone",
+        "title": "Responsif & Modern",
+        "description": "Akses dari perangkat apapun dengan UI/UX modern, tema gelap/terang, dan performa optimal."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "Cara Kerja",
+    "subtitle": "Alur sistem yang simpel dan efektif",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Sensor Mendeteksi",
+        "description": "Sensor IoT memantau kualitas udara dan jumlah pengunjung secara real-time."
+      },
+      {
+        "number": "02",
+        "title": "Notifikasi Otomatis",
+        "description": "Sistem mengirim notifikasi ketika kamar mandi perlu dibersihkan."
+      },
+      {
+        "number": "03",
+        "title": "Karyawan Tap RFID",
+        "description": "Karyawan tap kartu RFID untuk memulai dan menyelesaikan pembersihan."
+      },
+      {
+        "number": "04",
+        "title": "Poin Diberikan",
+        "description": "Poin otomatis masuk ke e-wallet karyawan sebagai reward."
+      }
+    ]
+  },
+  "iotSensors": {
+    "title": "Teknologi Sensor",
+    "subtitle": "Hardware IoT canggih untuk monitoring presisi",
+    "sensors": [
+      {
+        "name": "MQ-135",
+        "type": "Air Quality",
+        "description": "Sensor kualitas udara dengan deteksi gas berbahaya hingga 10000 PPM",
+        "unit": "PPM",
+        "status": "active"
+      },
+      {
+        "name": "IR Sensor",
+        "type": "Motion Detection",
+        "description": "Penghitung pengunjung otomatis dengan akurasi tinggi",
+        "unit": "Count",
+        "status": "active"
+      },
+      {
+        "name": "RFID RC522",
+        "type": "Card Reader",
+        "description": "Validasi identitas karyawan untuk tracking pembersihan",
+        "unit": "Tap",
+        "status": "active"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Testimoni",
+    "subtitle": "Apa kata pengguna SANIPOINT",
+    "items": [
+      {
+        "name": "Ahmad Fauzi",
+        "role": "Store Manager, Alfamart",
+        "content": "SANIPOINT mengubah cara kami mengelola kebersihan. Karyawan lebih termotivasi dengan sistem poin, dan monitoring jadi jauh lebih mudah.",
+        "avatar": "AF"
+      },
+      {
+        "name": "Siti Nurhaliza",
+        "role": "Area Supervisor, Indomaret",
+        "content": "Dashboard yang intuitif dan laporan real-time sangat membantu dalam pengambilan keputusan. Sistem IoT-nya sangat reliable.",
+        "avatar": "SN"
+      },
+      {
+        "name": "Budi Santoso",
+        "role": "IT Manager, Circle K",
+        "content": "Integrasi sensor yang mulus dan API yang well-documented membuat implementasi sangat lancar. Tim karyawan sangat antusias.",
+        "avatar": "BS"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Siap Meningkatkan Standar Kebersihan?",
+    "description": "Bergabung dengan ratusan bisnis yang sudah menggunakan SANIPOINT untuk monitoring kebersihan yang lebih cerdas.",
+    "button": "Hubungi Kami"
+  },
+  "footer": {
+    "copyright": "© 2024 SANIPOINT - IoT Bathroom Monitoring System",
+    "links": [
+      { "label": "Dokumentasi", "href": "#docs" },
+      { "label": "API", "href": "#api" },
+      { "label": "Kontak", "href": "#contact" }
+    ]
+  }
+}

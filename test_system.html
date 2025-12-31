@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANIPOINT IoT System Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .test-section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-header { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px; }
+        .test-item { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; color: #856404; }
+        .info { background: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px; }
+        button:hover { background: #0056b3; }
+        .btn-test { background: #28a745; }
+        .btn-reset { background: #dc3545; }
+        .btn-simulate { background: #ffc107; color: #212529; }
+        input, select { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; }
+        .status-indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .status-online { background: #28a745; }
+        .status-offline { background: #dc3545; }
+        .status-warning { background: #ffc107; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚽 SANIPOINT IoT System Test Dashboard</h1>
+        
+        <!-- System Status Overview -->
+        <div class="test-section">
+            <h2 class="test-header">📊 System Status Overview</h2>
+            <div class="grid">
+                <div class="test-item info">
+                    <h4><span class="status-indicator" id="db-status"></span>Database Connection</h4>
+                    <p id="db-info">Checking...</p>
+                    <button onclick="testDatabase()">Test Database</button>
+                </div>
+                <div class="test-item info">
+                    <h4><span class="status-indicator" id="endpoint-status"></span>IoT Endpoints</h4>
+                    <p id="endpoint-info">Checking...</p>
+                    <button onclick="testAllEndpoints()">Test Endpoints</button>
+                </div>
+                <div class="test-item info">
+                    <h4><span class="status-indicator" id="web-status"></span>Web Integration</h4>
+                    <p id="web-info">Checking...</p>
+                    <button onclick="testWebIntegration()">Test Web Pages</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Tests -->
+        <div class="test-section">
+            <h2 class="test-header">🗄️ Database Tests</h2>
+            <div class="test-item">
+                <h4>Database Tables & Data</h4>
+                <button onclick="checkTables()">Check Tables</button>
+                <button onclick="checkSampleData()">Check Sample Data</button>
+                <button onclick="runMigration()">Run Migration</button>
+                <div id="db-results"></div>
+            </div>
+        </div>
+
+        <!-- Endpoint Tests -->
+        <div class="test-section">
+            <h2 class="test-header">🌐 IoT Endpoint Tests</h2>
+            
+            <!-- Update Status Test -->
+            <div class="test-item">
+                <h4>1. Update Toilet Status</h4>
+                <div>
+                    <label>Toilet ID:</label>
+                    <select id="toilet-id">
+                        <option value="1">Toilet 1</option>
+                        <option value="2">Toilet 2</option>
+                    </select>
+                    <label>Visitor Count:</label>
+                    <input type="number" id="visitor-count" value="3" min="0" max="10">
+                    <label>Gas Level:</label>
+                    <input type="number" id="gas-level" value="450" min="0" max="3000">
+                </div>
+                <button class="btn-test" onclick="testUpdateStatus()">Test Update Status</button>
+                <div id="update-status-result"></div>
+            </div>
+
+            <!-- RFID Test -->
+            <div class="test-item">
+                <h4>2. RFID Tap Simulation</h4>
+                <div>
+                    <label>Card UID:</label>
+                    <select id="rfid-uid">
+                        <option value="B490FBB0">Admin Card 1</option>
+                        <option value="C6861BFF">Admin Card 2</option>
+                        <option value="EMP001">Employee Card</option>
+                        <option value="UNKNOWN">Unknown Card</option>
+                    </select>
+                    <label>Toilet ID:</label>
+                    <select id="rfid-toilet">
+                        <option value="1">Toilet 1</option>
+                        <option value="2">Toilet 2</option>
+                    </select>
+                </div>
+                <button class="btn-test" onclick="testRFIDTap()">Test RFID Tap</button>
+                <div id="rfid-result"></div>
+            </div>
+
+            <!-- Get Status Test -->
+            <div class="test-item">
+                <h4>3. Get System Status</h4>
+                <button class="btn-test" onclick="testGetStatus()">Get Current Status</button>
+                <button onclick="startRealTimeMonitor()">Start Real-time Monitor</button>
+                <button onclick="stopRealTimeMonitor()">Stop Monitor</button>
+                <div id="status-result"></div>
+            </div>
+        </div>
+
+        <!-- Sensor Simulation -->
+        <div class="test-section">
+            <h2 class="test-header">🔧 Sensor Simulation</h2>
+            <div class="test-item">
+                <h4>IoT Device Simulation</h4>
+                <div class="grid">
+                    <div>
+                        <h5>Toilet 1 Simulation</h5>
+                        <button class="btn-simulate" onclick="simulateVisitor(1)">Simulate Visitor</button>
+                        <button class="btn-simulate" onclick="simulateGasAlert(1)">Gas Alert</button>
+                        <button class="btn-simulate" onclick="simulateCleaning(1)">Start Cleaning</button>
+                    </div>
+                    <div>
+                        <h5>Toilet 2 Simulation</h5>
+                        <button class="btn-simulate" onclick="simulateVisitor(2)">Simulate Visitor</button>
+                        <button class="btn-simulate" onclick="simulateGasAlert(2)">Gas Alert</button>
+                        <button class="btn-simulate" onclick="simulateCleaning(2)">Start Cleaning</button>
+                    </div>
+                </div>
+                <div id="simulation-result"></div>
+            </div>
+        </div>
+
+        <!-- Web Integration Tests -->
+        <div class="test-section">
+            <h2 class="test-header">🌐 Web Integration Tests</h2>
+            <div class="test-item">
+                <h4>Page Accessibility</h4>
+                <button onclick="testMonitoringPage()">Test Monitoring Page</button>
+                <button onclick="testDashboard()">Test Dashboard</button>
+                <button onclick="testDatabase()">Test Database Connection</button>
+                <div id="web-test-result"></div>
+            </div>
+        </div>
+
+        <!-- System Reset -->
+        <div class="test-section">
+            <h2 class="test-header">🔄 System Reset & Cleanup</h2>
+            <div class="test-item warning">
+                <h4>⚠️ Reset Functions</h4>
+                <button class="btn-reset" onclick="resetAllCounters()">Reset All Counters</button>
+                <button class="btn-reset" onclick="clearTestData()">Clear Test Data</button>
+                <button class="btn-reset" onclick="resetToDefaults()">Reset to Defaults</button>
+                <div id="reset-result"></div>
+            </div>
+        </div>
+
+        <!-- Real-time Log -->
+        <div class="test-section">
+            <h2 class="test-header">📝 Real-time Activity Log</h2>
+            <div class="test-item">
+                <div style="height: 300px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 4px;">
+                    <div id="activity-log"></div>
+                </div>
+                <button onclick="clearLog()">Clear Log</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let realTimeInterval;
+        let logCounter = 0;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            log('System test dashboard loaded');
+            testDatabase();
+            testAllEndpoints();
+        });
+
+        // Logging function
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('activity-log');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                'info': '#17a2b8',
+                'success': '#28a745',
+                'error': '#dc3545',
+                'warning': '#ffc107'
+            };
+            
+            logDiv.innerHTML += `<div style="color: ${colors[type]}; margin: 5px 0;">
+                [${timestamp}] ${message}
+            </div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            logCounter++;
+        }
+
+        // Database Tests
+        async function testDatabase() {
+            log('Testing remote database connection...');
+            try {
+                const response = await fetch('https://storage-241204-250305.beznlabs.web.id/sanipoint-api/test_connection.php');
+                const result = await response.json();
+                
+                if (result.success) {
+                    updateStatus('db-status', 'online');
+                    document.getElementById('db-info').textContent = 'Remote API connected successfully';
+                    log('Remote database connection: SUCCESS', 'success');
+                } else {
+                    updateStatus('db-status', 'offline');
+                    document.getElementById('db-info').textContent = 'Remote API connection failed';
+                    log('Remote database connection: FAILED - ' + result.message, 'error');
+                }
+            } catch (error) {
+                updateStatus('db-status', 'offline');
+                document.getElementById('db-info').textContent = 'Remote API connection error';
+                log('Remote database connection: ERROR - ' + error.message, 'error');
+            }
+        }
+
+        async function checkTables() {
+            log('Checking remote database tables...');
+            try {
+                const response = await fetch('https://storage-241204-250305.beznlabs.web.id/sanipoint-api/check_tables.php');
+                const result = await response.json();
+                document.getElementById('db-results').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                log('Remote table check completed', 'success');
+            } catch (error) {
+                log('Remote table check failed: ' + error.message, 'error');
+            }
+        }
+
+        async function runMigration() {
+            log('Running IoT migration...');
+            try {
+                const response = await fetch('/sanipoint/database/run_iot_migration.php');
+                const result = await response.text();
+                document.getElementById('db-results').innerHTML = `<pre>${result}</pre>`;
+                log('Migration completed', 'success');
+            } catch (error) {
+                log('Migration failed: ' + error.message, 'error');
+            }
+        }
+
+        // Endpoint Tests
+        async function testAllEndpoints() {
+            log('Testing all IoT endpoints...');
+            let allSuccess = true;
+            
+            // Test each endpoint
+            const tests = [
+                { name: 'Update Status', func: () => testUpdateStatus(false) },
+                { name: 'RFID Tap', func: () => testRFIDTap(false) },
+                { name: 'Get Status', func: () => testGetStatus(false) }
+            ];
+            
+            for (const test of tests) {
+                try {
+                    await test.func();
+                    log(`${test.name}: PASSED`, 'success');
+                } catch (error) {
+                    log(`${test.name}: FAILED - ${error.message}`, 'error');
+                    allSuccess = false;
+                }
+            }
+            
+            updateStatus('endpoint-status', allSuccess ? 'online' : 'warning');
+            document.getElementById('endpoint-info').textContent = allSuccess ? 'All endpoints working' : 'Some endpoints have issues';
+        }
+
+        // Test update status endpoint
+        async function testUpdateStatus(showResult = true) {
+            const toiletId = document.getElementById('toilet-id').value;
+            const count = document.getElementById('visitor-count').value;
+            const gasLevel = document.getElementById('gas-level').value;
+            
+            log(`Testing update status: Toilet ${toiletId}, Count ${count}, Gas ${gasLevel}`);
+            
+            const formData = new FormData();
+            formData.append('toilet_id', toiletId);
+            formData.append('count', count);
+            formData.append('gas_level', gasLevel);
+            formData.append('is_locked', gasLevel > 1800 ? '1' : '0');
+            
+            try {
+                const response = await fetch('https://storage-241204-250305.beznlabs.web.id/sanipoint-api/iot/update_status.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                if (showResult) {
+                    document.getElementById('update-status-result').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                }
+                
+                if (result.success) {
+                    log('Update status: SUCCESS', 'success');
+                } else {
+                    log('Update status: FAILED - ' + result.message, 'error');
+                }
+            } catch (error) {
+                log('Update status: ERROR - ' + error.message, 'error');
+                if (showResult) {
+                    document.getElementById('update-status-result').innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                }
+            }
+        }
+
+        async function testRFIDTap(showResult = true) {
+            const uid = document.getElementById('rfid-uid').value;
+            const toiletId = document.getElementById('rfid-toilet').value;
+            
+            log(`Testing RFID tap: UID ${uid}, Toilet ${toiletId}`);
+            
+            const formData = new FormData();
+            formData.append('uid', uid);
+            formData.append('toilet_id', toiletId);
+            
+            try {
+                const response = await fetch('https://storage-241204-250305.beznlabs.web.id/sanipoint-api/iot/rfid_tap.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                if (showResult) {
+                    document.getElementById('rfid-result').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                }
+                
+                if (result.success) {
+                    log(`RFID tap: SUCCESS - ${result.action}`, 'success');
+                } else {
+                    log('RFID tap: FAILED - ' + result.message, 'error');
+                }
+            } catch (error) {
+                log('RFID tap: ERROR - ' + error.message, 'error');
+                if (showResult) {
+                    document.getElementById('rfid-result').innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                }
+            }
+        }
+
+        async function testGetStatus(showResult = true) {
+            log('Testing get status endpoint...');
+            
+            try {
+                const response = await fetch('https://storage-241204-250305.beznlabs.web.id/sanipoint-api/iot/get_status.php');
+                const result = await response.json();
+                
+                if (showResult) {
+                    document.getElementById('status-result').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                }
+                
+                if (result.success) {
+                    log('Get status: SUCCESS', 'success');
+                } else {
+                    log('Get status: FAILED - ' + result.message, 'error');
+                }
+            } catch (error) {
+                log('Get status: ERROR - ' + error.message, 'error');
+                if (showResult) {
+                    document.getElementById('status-result').innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                }
+            }
+        }
+
+        // Simulation Functions
+        async function simulateVisitor(toiletId) {
+            log(`Simulating visitor entry for Toilet ${toiletId}`);
+            
+            // Simulate multiple visitors
+            for (let i = 1; i <= 3; i++) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const formData = new FormData();
+                formData.append('toilet_id', toiletId);
+                formData.append('count', i);
+                formData.append('gas_level', Math.floor(Math.random() * 800) + 200);
+                formData.append('is_locked', '0');
+                
+                try {
+                    const response = await fetch('/sanipoint/endpoint-sanipoint/update_status.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+                    log(`Visitor ${i} entered Toilet ${toiletId}`, 'info');
+                } catch (error) {
+                    log(`Simulation error: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function simulateGasAlert(toiletId) {
+            log(`Simulating gas alert for Toilet ${toiletId}`);
+            
+            const formData = new FormData();
+            formData.append('toilet_id', toiletId);
+            formData.append('count', '5');
+            formData.append('gas_level', '2000');
+            formData.append('is_locked', '1');
+            
+            try {
+                const response = await fetch('/sanipoint/endpoint-sanipoint/update_status.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                log(`Gas alert triggered for Toilet ${toiletId}`, 'warning');
+            } catch (error) {
+                log(`Gas alert simulation error: ${error.message}`, 'error');
+            }
+        }
+
+        async function simulateCleaning(toiletId) {
+            log(`Simulating cleaning process for Toilet ${toiletId}`);
+            
+            // Start cleaning
+            let formData = new FormData();
+            formData.append('uid', 'EMP001');
+            formData.append('toilet_id', toiletId);
+            
+            try {
+                let response = await fetch('/sanipoint/endpoint-sanipoint/rfid_tap.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                let result = await response.json();
+                log(`Cleaning started for Toilet ${toiletId}`, 'info');
+                
+                // Wait 3 seconds then finish cleaning
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                response = await fetch('/sanipoint/endpoint-sanipoint/rfid_tap.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                result = await response.json();
+                log(`Cleaning finished for Toilet ${toiletId}`, 'success');
+                
+            } catch (error) {
+                log(`Cleaning simulation error: ${error.message}`, 'error');
+            }
+        }
+
+        // Web Integration Tests
+        async function testWebIntegration() {
+            log('Testing web integration...');
+            try {
+                const response = await fetch('karyawan/monitoring');
+                if (response.ok) {
+                    updateStatus('web-status', 'online');
+                    document.getElementById('web-info').textContent = 'Web pages accessible';
+                    log('Web integration: SUCCESS', 'success');
+                } else {
+                    updateStatus('web-status', 'warning');
+                    document.getElementById('web-info').textContent = 'Some pages not accessible';
+                    log('Web integration: WARNING', 'warning');
+                }
+            } catch (error) {
+                updateStatus('web-status', 'offline');
+                document.getElementById('web-info').textContent = 'Web integration failed';
+                log('Web integration: ERROR - ' + error.message, 'error');
+            }
+        }
+
+        // Real-time Monitor
+        function startRealTimeMonitor() {
+            log('Starting real-time monitor...');
+            realTimeInterval = setInterval(async () => {
+                try {
+                    const response = await fetch('/sanipoint/endpoint-sanipoint/get_status.php');
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        document.getElementById('status-result').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                    }
+                } catch (error) {
+                    log('Real-time monitor error: ' + error.message, 'error');
+                }
+            }, 5000);
+        }
+
+        function stopRealTimeMonitor() {
+            if (realTimeInterval) {
+                clearInterval(realTimeInterval);
+                log('Real-time monitor stopped');
+            }
+        }
+
+        // Reset Functions
+        async function resetAllCounters() {
+            log('Resetting all counters...');
+            
+            const formData = new FormData();
+            formData.append('uid', 'B490FBB0');
+            formData.append('toilet_id', '1');
+            
+            try {
+                await fetch('/sanipoint/endpoint-sanipoint/rfid_tap.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                formData.set('toilet_id', '2');
+                await fetch('/sanipoint/endpoint-sanipoint/rfid_tap.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                log('All counters reset successfully', 'success');
+            } catch (error) {
+                log('Reset failed: ' + error.message, 'error');
+            }
+        }
+
+        // Utility Functions
+        function updateStatus(elementId, status) {
+            const element = document.getElementById(elementId);
+            element.className = `status-indicator status-${status}`;
+        }
+
+        function clearLog() {
+            document.getElementById('activity-log').innerHTML = '';
+            logCounter = 0;
+        }
+
+        // Auto-refresh status every 30 seconds
+        setInterval(() => {
+            testDatabase();
+            testAllEndpoints();
+        }, 30000);
+    </script>
+</body>
+</html>

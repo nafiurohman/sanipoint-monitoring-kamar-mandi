@@ -33,7 +33,7 @@ class ProductModel {
     }
     
     public function getById($id) {
-        return $this->db->fetch("SELECT * FROM products WHERE id = ? AND is_active = 1", [$id]);
+        return $this->db->fetch("SELECT * FROM products WHERE id = ?", [$id]);
     }
     
     public function create($data) {
@@ -109,23 +109,59 @@ class ProductModel {
         }
     }
     
-    public function createCategory($data) {
-        $validation = Security::validateInput($data, [
-            'name' => ['required' => true, 'min' => 3, 'max' => 100]
-        ]);
-        
-        if (!empty($validation)) {
-            return ['success' => false, 'message' => 'Validation failed', 'errors' => $validation];
+    public function restoreStock($id, $quantity) {
+        $product = $this->getById($id);
+        if (!$product) {
+            return ['success' => false, 'message' => 'Product not found'];
         }
         
+        $new_stock = $product['stock'] + $quantity;
+        
         try {
-            $this->db->insert('product_categories', [
-                'name' => $data['name'],
-                'description' => $data['description'] ?? null
-            ]);
-            return ['success' => true, 'message' => 'Category created successfully'];
+            $this->db->update('products', ['stock' => $new_stock], 'id = ?', [$id]);
+            return ['success' => true, 'new_stock' => $new_stock];
         } catch (Exception $e) {
-            return ['success' => false, 'message' => 'Failed to create category'];
+            return ['success' => false, 'message' => 'Failed to restore stock'];
+        }
+    }
+    
+    public function delete($id) {
+        try {
+            // Check if product has any order items
+            $result = $this->db->fetch(
+                "SELECT COUNT(*) as count FROM order_items WHERE product_id = ?", 
+                [$id]
+            );
+            $hasOrders = $result ? (int)$result['count'] > 0 : false;
+            
+            if ($hasOrders) {
+                // Soft delete - set is_active to false
+                $this->db->update('products', ['is_active' => 0], 'id = ?', [$id]);
+                return ['success' => true, 'message' => 'Product deactivated successfully'];
+            } else {
+                // Hard delete if no orders
+                $this->db->execute("DELETE FROM products WHERE id = ?", [$id]);
+                return ['success' => true, 'message' => 'Product deleted successfully'];
+            }
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Failed to delete product'];
+        }
+    }
+    
+    public function toggleStatus($id) {
+        try {
+            $product = $this->getById($id);
+            if (!$product) {
+                return ['success' => false, 'message' => 'Product not found'];
+            }
+            
+            $newStatus = $product['is_active'] ? 0 : 1;
+            $this->db->update('products', ['is_active' => $newStatus], 'id = ?', [$id]);
+            
+            $message = $newStatus ? 'Product activated successfully' : 'Product deactivated successfully';
+            return ['success' => true, 'message' => $message];
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Failed to update product status'];
         }
     }
 }

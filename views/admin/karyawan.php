@@ -78,24 +78,12 @@ ob_start();
 <div id="add-employee-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
     <div class="bg-white rounded-lg p-6 w-full max-w-md">
         <h3 class="text-lg font-semibold mb-4">Tambah Karyawan Baru</h3>
-        <form class="ajax-form" action="/sanipoint/admin/karyawan" method="POST" data-reload="true">
+        <form class="ajax-form" method="POST" data-reload="true">
             <input type="hidden" name="action" value="create">
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Username</label>
-                    <input type="text" name="username" required class="input">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" required class="input">
-                </div>
-                <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                     <input type="text" name="full_name" required class="input">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Kode Karyawan</label>
-                    <input type="text" name="employee_code" required class="input">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Email</label>
@@ -105,12 +93,55 @@ ob_start();
                     <label class="block text-sm font-medium text-gray-700">Telepon</label>
                     <input type="text" name="phone" class="input">
                 </div>
+                <div class="bg-blue-50 p-3 rounded-lg">
+                    <p class="text-sm text-blue-700">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Username, kode karyawan, dan password akan dibuat otomatis oleh sistem
+                    </p>
+                </div>
             </div>
             <div class="flex justify-end space-x-3 mt-6">
                 <button type="button" class="modal-close btn btn-secondary">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Credentials Modal -->
+<div id="credentials-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+        <h3 class="text-lg font-semibold mb-4 text-green-600">
+            <i class="fas fa-check-circle mr-2"></i>Karyawan Berhasil Dibuat
+        </h3>
+        <div class="space-y-4">
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-medium text-gray-900 mb-3">Data Login Karyawan:</h4>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Username:</span>
+                        <span class="font-mono font-medium" id="cred-username">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Kode Karyawan:</span>
+                        <span class="font-mono font-medium" id="cred-code">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Password:</span>
+                        <span class="font-mono font-medium" id="cred-password">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-yellow-50 p-3 rounded-lg">
+                <p class="text-sm text-yellow-700">
+                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    Catat data ini dengan baik. Password default dapat diubah oleh admin atau karyawan.
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-end mt-6">
+            <button onclick="closeCredentialsModal()" class="btn btn-primary">Tutup</button>
+        </div>
     </div>
 </div>
 

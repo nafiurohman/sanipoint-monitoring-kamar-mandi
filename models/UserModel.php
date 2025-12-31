@@ -16,7 +16,8 @@ class UserModel {
     }
     
     public function countActiveEmployees() {
-        return $this->db->fetch("SELECT COUNT(*) as count FROM users WHERE role = 'karyawan' AND is_active = 1")['count'];
+        $result = $this->db->fetch("SELECT COUNT(*) as count FROM users WHERE role = 'karyawan' AND is_active = 1");
+        return $result ? (int)$result['count'] : 0;
     }
     
     public function getPointsDistributedToday() {
@@ -24,15 +25,13 @@ class UserModel {
                 FROM point_transactions 
                 WHERE transaction_type = 'earned' 
                 AND DATE(created_at) = CURDATE()";
-        return $this->db->fetch($sql)['total'];
+        $result = $this->db->fetch($sql);
+        return $result ? (int)$result['total'] : 0;
     }
     
     public function createEmployee($data) {
         $validation = Security::validateInput($data, [
-            'username' => ['required' => true, 'min' => 3, 'max' => 50],
-            'password' => ['required' => true, 'min' => 6],
             'full_name' => ['required' => true, 'min' => 3, 'max' => 100],
-            'employee_code' => ['required' => true, 'min' => 3, 'max' => 20],
             'email' => ['email' => true],
             'phone' => ['min' => 10, 'max' => 20]
         ]);
@@ -41,28 +40,25 @@ class UserModel {
             return ['success' => false, 'message' => 'Validation failed', 'errors' => $validation];
         }
         
-        // Check if username or employee_code already exists
-        $existing = $this->db->fetch("SELECT id FROM users WHERE username = ? OR employee_code = ?", 
-                                   [$data['username'], $data['employee_code']]);
-        if ($existing) {
-            return ['success' => false, 'message' => 'Username or employee code already exists'];
-        }
-        
         try {
             $this->db->getConnection()->beginTransaction();
             
+            // Generate auto credentials
+            $username = $this->generateUsername();
+            $employee_code = $this->generateEmployeeCode();
+            $password = 'password'; // Default password
+            
             // Create user
-            $this->db->insert('users', [
-                'username' => $data['username'],
-                'password' => Security::hashPassword($data['password']),
+            $user_id = $this->db->insert('users', [
+                'username' => $username,
+                'password' => Security::hashPassword($password),
                 'full_name' => $data['full_name'],
                 'email' => $data['email'] ?? null,
                 'phone' => $data['phone'] ?? null,
                 'role' => 'karyawan',
-                'employee_code' => $data['employee_code']
+                'employee_code' => $employee_code,
+                'is_active' => 1
             ]);
-            
-            $user_id = $this->db->getConnection()->lastInsertId();
             
             // Initialize points
             $this->db->insert('points', [
@@ -73,12 +69,36 @@ class UserModel {
             ]);
             
             $this->db->getConnection()->commit();
-            return ['success' => true, 'message' => 'Employee created successfully'];
+            
+            return [
+                'success' => true, 
+                'message' => 'Employee created successfully',
+                'credentials' => [
+                    'username' => $username,
+                    'employee_code' => $employee_code,
+                    'password' => $password
+                ]
+            ];
             
         } catch (Exception $e) {
             $this->db->getConnection()->rollBack();
-            return ['success' => false, 'message' => 'Failed to create employee'];
+            error_log('Create employee error: ' . $e->getMessage());
+            return ['success' => false, 'message' => 'Failed to create employee: ' . $e->getMessage()];
         }
+    }
+    
+    private function generateUsername() {
+        $result = $this->db->fetch("SELECT COUNT(*) as count FROM users WHERE role = 'karyawan'");
+        $count = $result ? (int)$result['count'] : 0;
+        return 'karyawan' . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+    }
+    
+    private function generateEmployeeCode() {
+        do {
+            $code = 'KAR-' . strtoupper(substr(md5(uniqid()), 0, 6));
+            $exists = $this->db->fetch("SELECT id FROM users WHERE employee_code = ?", [$code]);
+        } while ($exists);
+        return $code;
     }
     
     public function updateEmployee($id, $data) {
@@ -122,11 +142,55 @@ class UserModel {
     
     public function deleteEmployee($id) {
         try {
-            // Soft delete - set is_active to false
-            $this->db->update('users', ['is_active' => 0], 'id = ?', [$id]);
-            return ['success' => true, 'message' => 'Employee deactivated successfully'];
+            // Check if employee has any cleaning logs or transactions
+            $result = $this->db->fetch(
+                "SELECT COUNT(*) as count FROM cleaning_logs WHERE user_id = ?", 
+                [$id]
+            );
+            $hasActivity = $result ? (int)$result['count'] > 0 : false;
+            
+            if ($hasActivity) {
+                // Soft delete - set is_active to false
+                $this->db->update('users', ['is_active' => 0], 'id = ?', [$id]);
+                return ['success' => true, 'message' => 'Employee deactivated successfully'];
+            } else {
+                // Hard delete if no activity
+                $this->db->getConnection()->beginTransaction();
+                
+                // Delete related records first
+                $this->db->execute("DELETE FROM points WHERE user_id = ?", [$id]);
+                $this->db->execute("DELETE FROM rfid_cards WHERE user_id = ?", [$id]);
+                $this->db->execute("DELETE FROM users WHERE id = ?", [$id]);
+                
+                $this->db->getConnection()->commit();
+                return ['success' => true, 'message' => 'Employee deleted successfully'];
+            }
         } catch (Exception $e) {
-            return ['success' => false, 'message' => 'Failed to deactivate employee'];
+            if ($this->db->getConnection()->inTransaction()) {
+                $this->db->getConnection()->rollBack();
+            }
+            return ['success' => false, 'message' => 'Failed to delete employee'];
+        }
+    }
+    
+    public function getEmployeeById($id) {
+        return $this->db->fetch("SELECT * FROM users WHERE id = ? AND role = 'karyawan'", [$id]);
+    }
+    
+    public function toggleEmployeeStatus($id) {
+        try {
+            $employee = $this->getEmployeeById($id);
+            if (!$employee) {
+                return ['success' => false, 'message' => 'Employee not found'];
+            }
+            
+            $newStatus = $employee['is_active'] ? 0 : 1;
+            $this->db->update('users', ['is_active' => $newStatus], 'id = ?', [$id]);
+            
+            $message = $newStatus ? 'Employee activated successfully' : 'Employee deactivated successfully';
+            return ['success' => true, 'message' => $message];
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Failed to update employee status'];
         }
     }
     
@@ -193,14 +257,24 @@ class UserModel {
     }
     
     public function updatePin($id, $pin) {
+        error_log('=== UPDATE PIN DEBUG ===');
+        error_log('User ID: ' . $id);
+        error_log('PIN: ' . $pin);
+        
         try {
-            $this->db->update('users', [
-                'pin' => password_hash($pin, PASSWORD_DEFAULT),
+            $hashedPin = password_hash($pin, PASSWORD_DEFAULT);
+            error_log('Hashed PIN: ' . substr($hashedPin, 0, 20) . '...');
+            
+            $result = $this->db->update('users', [
+                'pin' => $hashedPin,
                 'pin_created_at' => date('Y-m-d H:i:s')
             ], 'id = ?', [$id]);
             
+            error_log('Database update result: ' . ($result ? 'SUCCESS' : 'FAILED'));
+            
             return ['success' => true, 'message' => 'PIN updated successfully'];
         } catch (Exception $e) {
+            error_log('PIN update exception: ' . $e->getMessage());
             return ['success' => false, 'message' => 'Failed to update PIN'];
         }
     }

@@ -75,6 +75,23 @@ class ThemeManager {
             window.pointChart.update();
         }
     }
+    
+    // Compatibility method - delegate to main SaniPoint class
+    createToast(message, type = 'info', duration = 5000) {
+        if (window.sanipoint && window.sanipoint.showToast) {
+            window.sanipoint.showToast(message, type, duration);
+        } else {
+            // Simple fallback toast
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            }`;
+            toast.innerHTML = `<span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), duration);
+        }
+    }
 }
 
 // Initialize immediately

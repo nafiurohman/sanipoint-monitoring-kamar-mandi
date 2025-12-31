@@ -23,23 +23,36 @@ class Security {
         foreach ($rules as $field => $rule) {
             $value = $data[$field] ?? '';
             
-            if (isset($rule['required']) && $rule['required'] && empty($value)) {
-                $errors[$field] = "Field {$field} is required";
+            // Check required fields
+            if (isset($rule['required']) && $rule['required']) {
+                if (empty($value) && $value !== '0') {
+                    $errors[$field] = "Field {$field} is required";
+                    continue;
+                }
+            }
+            
+            // Skip validation if value is empty and not required
+            if (empty($value) && $value !== '0') {
                 continue;
             }
             
-            if (!empty($value)) {
-                if (isset($rule['min']) && strlen($value) < $rule['min']) {
-                    $errors[$field] = "Field {$field} must be at least {$rule['min']} characters";
-                }
-                if (isset($rule['max']) && strlen($value) > $rule['max']) {
-                    $errors[$field] = "Field {$field} must not exceed {$rule['max']} characters";
-                }
-                if (isset($rule['email']) && $rule['email'] && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $errors[$field] = "Field {$field} must be a valid email";
-                }
-                if (isset($rule['numeric']) && $rule['numeric'] && !is_numeric($value)) {
-                    $errors[$field] = "Field {$field} must be numeric";
+            // Length validation
+            if (isset($rule['min']) && strlen($value) < $rule['min']) {
+                $errors[$field] = "Field {$field} must be at least {$rule['min']} characters";
+            }
+            if (isset($rule['max']) && strlen($value) > $rule['max']) {
+                $errors[$field] = "Field {$field} must not exceed {$rule['max']} characters";
+            }
+            
+            // Email validation
+            if (isset($rule['email']) && $rule['email'] && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                $errors[$field] = "Field {$field} must be a valid email";
+            }
+            
+            // Numeric validation
+            if (isset($rule['numeric']) && $rule['numeric']) {
+                if (!is_numeric($value) || (float)$value < 0) {
+                    $errors[$field] = "Field {$field} must be a positive number";
                 }
             }
         }

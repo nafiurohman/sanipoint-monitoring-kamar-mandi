@@ -1,17 +1,23 @@
 <?php
-require_once 'core/Auth.php';
-require_once 'core/Security.php';
+require_once __DIR__ . '/../core/Auth.php';
+require_once __DIR__ . '/../core/Security.php';
+require_once __DIR__ . '/../config/config.php';
 
 class AuthController {
     private $auth;
     private $db;
     
     public function __construct() {
+        console_log('🔐 AuthController initialized');
         $this->auth = new Auth();
         $this->db = Database::getInstance();
     }
     
     public function loginForm() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return $this->login();
+        }
+        
         if ($this->auth->isLoggedIn()) {
             $this->redirectToDashboard();
         }
@@ -20,8 +26,7 @@ class AuthController {
     
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /sanipoint/login');
-            exit;
+            $this->redirectToLogin();
         }
         
         $username = Security::sanitizeInput($_POST['username'] ?? '');
@@ -41,15 +46,23 @@ class AuthController {
     }
     
     public function logout() {
+        console_log('🚪 User logging out');
         $this->auth->logout();
+        header('Location: ' . APP_URL);
+        exit;
     }
     
     private function redirectToDashboard() {
         if ($this->auth->hasRole('admin')) {
-            header('Location: /sanipoint/admin/dashboard');
+            header('Location: ' . APP_URL . 'admin/dashboard');
         } else {
-            header('Location: /sanipoint/karyawan/dashboard');
+            header('Location: ' . APP_URL . 'karyawan/dashboard');
         }
+        exit;
+    }
+    
+    private function redirectToLogin() {
+        header('Location: ' . APP_URL . 'login');
         exit;
     }
     

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
+
 class Auth {
     private $db;
     
@@ -24,7 +26,7 @@ class Auth {
     
     public function logout() {
         session_destroy();
-        header('Location: /sanipoint/login');
+        header('Location: ' . APP_URL);
         exit;
     }
     
@@ -43,7 +45,7 @@ class Auth {
     
     public function requireAuth() {
         if (!$this->isLoggedIn()) {
-            header('Location: /sanipoint/login');
+            header('Location: ' . APP_URL . 'login');
             exit;
         }
     }

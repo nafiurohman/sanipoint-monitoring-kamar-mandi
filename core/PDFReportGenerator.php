@@ -32,7 +32,7 @@ class PDFReportGenerator {
     private $db;
     
     public function __construct() {
-        $this->db = new Database();
+        $this->db = Database::getInstance()->getConnection();
     }
     
     public function generateEmployeeReport() {
@@ -201,7 +201,9 @@ class PDFReportGenerator {
             ORDER BY total_cleanings DESC
         ";
         
-        return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     private function getCleaningStats() {
@@ -218,6 +220,8 @@ class PDFReportGenerator {
             ORDER BY date DESC
         ";
         
-        return $this->db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

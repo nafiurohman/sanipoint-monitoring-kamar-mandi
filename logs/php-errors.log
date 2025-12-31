@@ -1,0 +1,521 @@
+[29-Dec-2025 02:10:43 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:10:43 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:10:43 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:10:43 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:14:43 Asia/Jakarta] PHP Parse error:  syntax error, unexpected identifier "nts", expecting "function" or "const" in C:\xampp\htdocs\sanipoint\models\OrderModel.php on line 101
+[29-Dec-2025 02:19:35 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:19:35 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:19:35 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:19:35 Asia/Jakarta] Order created with ID: 1fd981ee-093d-4d51-b41e-0f89a69ec6da
+[29-Dec-2025 02:19:35 Asia/Jakarta] Order completed successfully
+[29-Dec-2025 02:20:51 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:20:51 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:20:51 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:20:51 Asia/Jakarta] Order created with ID: 9b7ee68c-c367-48b0-a51f-e469bc3cb3a8
+[29-Dec-2025 02:20:51 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:22:37 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:22:37 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:22:37 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:22:37 Asia/Jakarta] Order created with ID: 9f85a4ee-d403-4883-988e-fd382d5b5cc4
+[29-Dec-2025 02:22:37 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:24:06 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:24:06 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:24:06 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:24:06 Asia/Jakarta] Order created with ID: 0ee84794-37ab-4419-9865-2f839520f232
+[29-Dec-2025 02:24:06 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:24:31 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:24:31 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:24:31 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:24:31 Asia/Jakarta] Order created with ID: c535166f-5fd5-402d-93df-8fdd4711e651
+[29-Dec-2025 02:24:31 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:26:40 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:26:40 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:26:40 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440032","quantity":1}]
+[29-Dec-2025 02:26:40 Asia/Jakarta] Order created with ID: 32f9b7d9-2127-4e0f-8eea-299acc16da96
+[29-Dec-2025 02:26:40 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:27:06 Asia/Jakarta] === CREATE ORDER DEBUG ===
+[29-Dec-2025 02:27:06 Asia/Jakarta] User ID: cd13f47a-7918-4e74-8d94-9b4697de3e65
+[29-Dec-2025 02:27:06 Asia/Jakarta] Cart items: [{"product_id":"550e8400-e29b-41d4-a716-446655440034","quantity":1}]
+[29-Dec-2025 02:27:06 Asia/Jakarta] Order created with ID: fff119b4-279c-438c-a18a-b3631d10fcef
+[29-Dec-2025 02:27:06 Asia/Jakarta] Order creation failed: There is no active transaction
+[29-Dec-2025 02:27:36 Asia/Jakarta] PHP Parse error:  syntax error, unexpected identifier "nts", expecting "function" or "const" in C:\xampp\htdocs\sanipoint\models\OrderModel.php on line 94
+[29-Dec-2025 02:29:41 Asia/Jakarta] ✅ ORDER SUCCESS: Order ORD202512294466 created for user cd13f47a-7918-4e74-8d94-9b4697de3e65 with 3 points
+[29-Dec-2025 02:34:39 Asia/Jakarta] ✅ ORDER SUCCESS: Order ORD202512290261 created for user cd13f47a-7918-4e74-8d94-9b4697de3e65 with 3 points
+[29-Dec-2025 02:41:50 Asia/Jakarta] PHP Warning:  Undefined array key "" in C:\xampp\htdocs\sanipoint\views\karyawan\riwayat.php on line 132
+[29-Dec-2025 02:41:50 Asia/Jakarta] PHP Warning:  Undefined array key "" in C:\xampp\htdocs\sanipoint\views\karyawan\riwayat.php on line 133
+[29-Dec-2025 02:53:54 Asia/Jakarta] Order status debug: Array
+(
+    [id] => 87080f05-6048-4fb8-aa19-9a3e61b3286c
+    [order_number] => ORD202512290261
+    [total_points] => 3
+    [status] => 
+    [created_at] => 2025-12-29 02:34:39
+    [received_at] => 2025-12-29 02:41:48
+    [item_count] => 1
+)
+
+[29-Dec-2025 02:53:54 Asia/Jakarta] Order status debug: Array
+(
+    [id] => f6316d08-70de-489c-8998-8acdfeb69c44
+    [order_number] => ORD202512294466
+    [total_points] => 3
+    [status] => completed
+    [created_at] => 2025-12-29 02:29:41
+    [received_at] => 
+    [item_count] => 1
+)
+
+[29-Dec-2025 02:53:54 Asia/Jakarta] Order status debug: Array
+(
+    [id] => 0ae67d31-2cc1-41b4-9637-f5f01ada102d
+    [order_number] => ORD202512292994
+    [total_points] => 3
+    [status] => completed
+    [created_at] => 2025-12-29 02:28:27
+    [received_at] => 
+    [item_count] => 1
+)
+
+[29-Dec-2025 02:53:54 Asia/Jakarta] Order status debug: Array
+(
+    [id] => 1fd981ee-093d-4d51-b41e-0f89a69ec6da
+    [order_number] => ORD202512293060
+    [total_points] => 3
+    [status] => completed
+    [created_at] => 2025-12-29 02:19:35
+    [received_at] => 
+    [item_count] => 1
+)
+
+[29-Dec-2025 02:53:54 Asia/Jakarta] Order status debug: Array
+(
+    [id] => 566fda30-ffd1-450c-a893-e4713f0fa23f
+    [order_number] => ORD202512296209
+    [total_points] => 8
+    [status] => completed
+    [created_at] => 2025-12-29 01:49:26
+    [received_at] => 
+    [item_count] => 1
+)
+
+[30-Dec-2025 03:46:55 Asia/Jakarta] PHP Fatal error:  Cannot redeclare generateUUID() (previously declared in C:\xampp\htdocs\sanipoint\config\config.php:33) in C:\xampp\htdocs\sanipoint\core\Database.php on line 141
+[30-Dec-2025 03:47:02 Asia/Jakarta] PHP Fatal error:  Cannot redeclare generateUUID() (previously declared in C:\xampp\htdocs\sanipoint\config\config.php:33) in C:\xampp\htdocs\sanipoint\core\Database.php on line 141
+[30-Dec-2025 03:49:23 Asia/Jakarta] PHP Fatal error:  Uncaught Exception: Remote database API request failed in C:\xampp\htdocs\sanipoint\core\Database.php:94
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(29): Database->makeRequest('query.php', Array)
+#1 C:\xampp\htdocs\sanipoint\models\BathroomModel.php(27): Database->fetch('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(24): BathroomModel->count()
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(30): AdminController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(17): Router->callHandler('AdminController...')
+#5 C:\xampp\htdocs\sanipoint\index.php(55): Router->dispatch('/admin/dashboar...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 94
+[30-Dec-2025 04:29:21 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''10'' at line 6 in C:\xampp\htdocs\sanipoint\core\Database.php:87
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(87): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\BathroomModel.php(45): Database->fetchAll('SELECT cl.*, b....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(31): BathroomModel->getRecentActivities(10)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(30): AdminController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(17): Router->callHandler('AdminController...')
+#5 C:\xampp\htdocs\sanipoint\index.php(55): Router->dispatch('/admin/dashboar...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 87
+[30-Dec-2025 04:30:01 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''10'' at line 6 in C:\xampp\htdocs\sanipoint\core\Database.php:101
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(101): PDOStatement->execute()
+#1 C:\xampp\htdocs\sanipoint\models\BathroomModel.php(45): Database->fetchAll('SELECT cl.*, b....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(31): BathroomModel->getRecentActivities(10)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(30): AdminController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(17): Router->callHandler('AdminController...')
+#5 C:\xampp\htdocs\sanipoint\index.php(55): Router->dispatch('/admin/dashboar...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 101
+[30-Dec-2025 04:30:12 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''10'' at line 6 in C:\xampp\htdocs\sanipoint\core\Database.php:101
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(101): PDOStatement->execute()
+#1 C:\xampp\htdocs\sanipoint\models\BathroomModel.php(45): Database->fetchAll('SELECT cl.*, b....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(31): BathroomModel->getRecentActivities(10)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(30): AdminController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(17): Router->callHandler('AdminController...')
+#5 C:\xampp\htdocs\sanipoint\index.php(55): Router->dispatch('/admin/dashboar...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 101
+[30-Dec-2025 08:45:48 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''100'' at line 6 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\SensorModel.php(57): Database->fetchAll('SELECT sl.*, s....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(79): SensorModel->getRecentData()
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(35): AdminController->sensor()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(22): Router->callHandler('AdminController...')
+#5 C:\xampp\htdocs\sanipoint\index.php(55): Router->dispatch('/admin/sensor')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 10:30:14 Asia/Jakarta] PHP Fatal error:  Uncaught Exception: Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'beznwebi_beznlabs_storage_241204_250305_user'@'localhost' (using password: YES) in C:\xampp\htdocs\sanipoint\core\Database.php:20
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(7): Database->initLocalDatabase()
+#1 C:\xampp\htdocs\sanipoint\core\Database.php(26): Database->__construct()
+#2 C:\xampp\htdocs\sanipoint\core\Auth.php(6): Database::getInstance()
+#3 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(14): Auth->__construct()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(39): AdminController->__construct()
+#5 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('AdminController...')
+#6 C:\xampp\htdocs\sanipoint\app.php(54): Router->dispatch('/admin/laporan')
+#7 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 20
+[30-Dec-2025 10:30:17 Asia/Jakarta] PHP Fatal error:  Uncaught Exception: Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'beznwebi_beznlabs_storage_241204_250305_user'@'localhost' (using password: YES) in C:\xampp\htdocs\sanipoint\core\Database.php:20
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(7): Database->initLocalDatabase()
+#1 C:\xampp\htdocs\sanipoint\core\Database.php(26): Database->__construct()
+#2 C:\xampp\htdocs\sanipoint\core\Auth.php(6): Database::getInstance()
+#3 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(14): Auth->__construct()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(39): AdminController->__construct()
+#5 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('AdminController...')
+#6 C:\xampp\htdocs\sanipoint\app.php(54): Router->dispatch('/admin/laporan')
+#7 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 20
+[30-Dec-2025 10:30:18 Asia/Jakarta] PHP Fatal error:  Uncaught Exception: Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'beznwebi_beznlabs_storage_241204_250305_user'@'localhost' (using password: YES) in C:\xampp\htdocs\sanipoint\core\Database.php:20
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(7): Database->initLocalDatabase()
+#1 C:\xampp\htdocs\sanipoint\core\Database.php(26): Database->__construct()
+#2 C:\xampp\htdocs\sanipoint\core\Auth.php(6): Database::getInstance()
+#3 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(14): Auth->__construct()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(39): AdminController->__construct()
+#5 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('AdminController...')
+#6 C:\xampp\htdocs\sanipoint\app.php(54): Router->dispatch('/admin/laporan')
+#7 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 20
+[30-Dec-2025 10:58:01 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''5'' at line 9 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\PointModel.php(172): Database->fetchAll('SELECT pt.*, \n ...', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\KaryawanController.php(28): PointModel->getRecentTransactions('550e8400-e29b-4...', 5)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(40): KaryawanController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('KaryawanControl...')
+#5 C:\xampp\htdocs\sanipoint\index.php(62): Router->dispatch('/karyawan/dashb...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 10:58:31 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''5'' at line 9 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\PointModel.php(172): Database->fetchAll('SELECT pt.*, \n ...', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\KaryawanController.php(28): PointModel->getRecentTransactions('550e8400-e29b-4...', 5)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(40): KaryawanController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('KaryawanControl...')
+#5 C:\xampp\htdocs\sanipoint\index.php(62): Router->dispatch('/karyawan/dashb...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 10:59:12 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''5'' at line 7 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\OrderModel.php(106): Database->fetchAll('SELECT o.id, o....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\KaryawanController.php(29): OrderModel->getUserOrders('550e8400-e29b-4...', 5)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(40): KaryawanController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('KaryawanControl...')
+#5 C:\xampp\htdocs\sanipoint\index.php(62): Router->dispatch('/karyawan/dashb...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 10:59:19 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''5'' at line 7 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\OrderModel.php(106): Database->fetchAll('SELECT o.id, o....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\KaryawanController.php(29): OrderModel->getUserOrders('550e8400-e29b-4...', 5)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(40): KaryawanController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('KaryawanControl...')
+#5 C:\xampp\htdocs\sanipoint\index.php(62): Router->dispatch('/karyawan/dashb...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 10:59:23 Asia/Jakarta] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''5'' at line 7 in C:\xampp\htdocs\sanipoint\core\Database.php:49
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\core\Database.php(49): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\sanipoint\models\OrderModel.php(106): Database->fetchAll('SELECT o.id, o....', Array)
+#2 C:\xampp\htdocs\sanipoint\controllers\KaryawanController.php(29): OrderModel->getUserOrders('550e8400-e29b-4...', 5)
+#3 C:\xampp\htdocs\sanipoint\core\Router.php(40): KaryawanController->dashboard()
+#4 C:\xampp\htdocs\sanipoint\core\Router.php(26): Router->callHandler('KaryawanControl...')
+#5 C:\xampp\htdocs\sanipoint\index.php(62): Router->dispatch('/karyawan/dashb...')
+#6 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\Database.php on line 49
+[30-Dec-2025 11:32:49 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 11:32:49 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 11:32:49 Asia/Jakarta] SANIPOINT: 🏠 Landing page (React app) accessed
+[30-Dec-2025 11:32:49 Asia/Jakarta] SANIPOINT: ✅ React app found, serving from /landing/
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: 🏠 Landing page (React app) accessed
+[30-Dec-2025 11:42:48 Asia/Jakarta] SANIPOINT: ✅ React app found, serving from /landing/
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: 🏠 Landing page (React app) accessed
+[30-Dec-2025 11:42:51 Asia/Jakarta] SANIPOINT: ✅ React app found, serving from /landing/
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: 🏠 Landing page (React app) accessed
+[30-Dec-2025 11:43:40 Asia/Jakarta] SANIPOINT: ✅ React app found, serving from /landing/
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: 🏠 Landing page accessed
+[30-Dec-2025 11:49:19 Asia/Jakarta] SANIPOINT: ✅ Landing page found, serving HTML
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: 🏠 Landing page accessed
+[30-Dec-2025 13:44:36 Asia/Jakarta] SANIPOINT: ✅ Landing page found, serving HTML
+[30-Dec-2025 13:44:36 Asia/Jakarta] PHP Warning:  file_get_contents(C:\xampp\htdocs\sanipoint/landing_part1.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\sanipoint\landing.php on line 3
+[30-Dec-2025 13:44:36 Asia/Jakarta] PHP Warning:  file_get_contents(C:\xampp\htdocs\sanipoint/landing_part2.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\sanipoint\landing.php on line 4
+[30-Dec-2025 13:44:36 Asia/Jakarta] PHP Warning:  file_get_contents(C:\xampp\htdocs\sanipoint/landing_part3.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\sanipoint\landing.php on line 5
+[30-Dec-2025 13:44:36 Asia/Jakarta] PHP Warning:  file_get_contents(C:\xampp\htdocs\sanipoint/landing_part4.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\sanipoint\landing.php on line 6
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: 🏠 Landing page accessed
+[30-Dec-2025 13:47:39 Asia/Jakarta] SANIPOINT: ✅ Landing page found, serving HTML
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 14:50:05 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/auth/login
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/auth/login
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/auth/login' (Original: /sanipoint/auth/login)
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: ✅ Route found: /auth/login
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎮 Calling: AuthController@loginForm
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🔐 AuthController initialized
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/dashboard
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/dashboard
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/dashboard' (Original: /sanipoint/admin/dashboard)
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/dashboard
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@dashboard
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:51:08 Asia/Jakarta] SANIPOINT: 📊 Admin Dashboard accessed
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/karyawan
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/karyawan
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/karyawan' (Original: /sanipoint/admin/karyawan)
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/karyawan
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@karyawan
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:26 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/kamar-mandi
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/kamar-mandi
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/kamar-mandi' (Original: /sanipoint/admin/kamar-mandi)
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/kamar-mandi
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@kamarMandi
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:29 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/produk
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/produk
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/produk' (Original: /sanipoint/admin/produk)
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/produk
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@produk
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:31 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/sensor
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/sensor
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/sensor' (Original: /sanipoint/admin/sensor)
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/sensor
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@sensor
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:35 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/transaksi
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/transaksi
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/transaksi' (Original: /sanipoint/admin/transaksi)
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/transaksi
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@transaksi
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:51:39 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/laporan
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/laporan
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/laporan' (Original: /sanipoint/admin/laporan)
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/laporan
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@laporan
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:52:05 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/laporan/pdf' (Original: /sanipoint/admin/laporan/pdf)
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/laporan/pdf
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@laporanPdf
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:52:07 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:52:08 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to private Database::__construct() from scope PDFReportGenerator in C:\xampp\htdocs\sanipoint\core\PDFReportGenerator.php:35
+Stack trace:
+#0 C:\xampp\htdocs\sanipoint\controllers\AdminController.php(101): PDFReportGenerator->__construct()
+#1 C:\xampp\htdocs\sanipoint\core\Router.php(56): AdminController->laporanPdf()
+#2 C:\xampp\htdocs\sanipoint\core\Router.php(36): Router->callHandler('AdminController...')
+#3 C:\xampp\htdocs\sanipoint\index.php(90): Router->dispatch('/admin/laporan/...')
+#4 {main}
+  thrown in C:\xampp\htdocs\sanipoint\core\PDFReportGenerator.php on line 35
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/laporan/pdf' (Original: /sanipoint/admin/laporan/pdf)
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/laporan/pdf
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@laporanPdf
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:54:20 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/laporan/pdf' (Original: /sanipoint/admin/laporan/pdf)
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/laporan/pdf
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@laporanPdf
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:55:17 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/laporan/pdf
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/laporan/pdf' (Original: /sanipoint/admin/laporan/pdf)
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/laporan/pdf
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@laporanPdf
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 14:55:28 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/login
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/login
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/login' (Original: /sanipoint/login)
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: ✅ Route found: /login
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎮 Calling: AuthController@loginForm
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🔐 AuthController initialized
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/karyawan/dashboard
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/karyawan/dashboard
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/karyawan/dashboard' (Original: /sanipoint/karyawan/dashboard)
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: ✅ Route found: /karyawan/dashboard
+[30-Dec-2025 15:45:49 Asia/Jakarta] SANIPOINT: 🎮 Calling: KaryawanController@dashboard
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/auth/logout
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/auth/logout
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/auth/logout' (Original: /sanipoint/auth/logout)
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: ✅ Route found: /auth/logout
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎮 Calling: AuthController@logout
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🔐 AuthController initialized
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🚪 User logging out
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/' (Original: /sanipoint/)
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: ✅ Route found: /
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎮 Calling: LandingController@index
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/login
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/login
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/login' (Original: /sanipoint/login)
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: ✅ Route found: /login
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🎮 Calling: AuthController@loginForm
+[30-Dec-2025 15:45:56 Asia/Jakarta] SANIPOINT: 🔐 AuthController initialized
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/login
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/login
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/login' (Original: /sanipoint/login)
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: ✅ Route found: /login
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎮 Calling: AuthController@loginForm
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🔐 AuthController initialized
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/dashboard
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/dashboard
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎯 Routing URI: '/admin/dashboard' (Original: /sanipoint/admin/dashboard)
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: ✅ Route found: /admin/dashboard
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🎮 Calling: AdminController@dashboard
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 🔐 AdminController initialized
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: ✅ Admin authentication verified
+[30-Dec-2025 15:46:06 Asia/Jakarta] SANIPOINT: 📊 Admin Dashboard accessed
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/admin/karyawan
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/admin/karyawan
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/admin/karyawan
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint/admin/karyawan
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint/admin/karyawan
+[30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
