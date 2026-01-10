@@ -2,14 +2,16 @@
 require_once __DIR__ . '/../config/config.php';
 
 class Auth {
-    private $db;
-    
-    public function __construct() {
-        $this->db = Database::getInstance();
+    public static function init() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     }
     
-    public function login($username, $password) {
-        $user = $this->db->fetch(
+    public static function login($username, $password) {
+        self::init();
+        $db = Database::getInstance();
+        $user = $db->fetch(
             "SELECT * FROM users WHERE username = ? AND is_active = 1",
             [$username]
         );
@@ -18,43 +20,53 @@ class Auth {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             return true;
         }
         return false;
     }
     
-    public function logout() {
+    public static function logout() {
+        self::init();
         session_destroy();
-        header('Location: ' . APP_URL);
+        header('Location: ../login.php');
         exit;
     }
     
-    public function isLoggedIn() {
+    public static function isLoggedIn() {
+        self::init();
         return isset($_SESSION['user_id']);
     }
     
-    public function getUser() {
-        if (!$this->isLoggedIn()) return null;
-        return $this->db->fetch("SELECT * FROM users WHERE id = ?", [$_SESSION['user_id']]);
+    public static function getUser() {
+        self::init();
+        if (!self::isLoggedIn()) return null;
+        $db = Database::getInstance();
+        return $db->fetch("SELECT * FROM users WHERE id = ?", [$_SESSION['user_id']]);
     }
     
-    public function hasRole($role) {
+    public static function hasRole($role) {
+        self::init();
         return isset($_SESSION['role']) && $_SESSION['role'] === $role;
     }
     
-    public function requireAuth() {
-        if (!$this->isLoggedIn()) {
-            header('Location: ' . APP_URL . 'login');
+    public static function requireAuth() {
+        self::init();
+        if (!self::isLoggedIn()) {
+            header('Location: ../login.php');
             exit;
         }
     }
     
-    public function requireRole($role) {
-        $this->requireAuth();
-        if (!$this->hasRole($role)) {
+    public static function requireRole($role) {
+        self::init();
+        if (!self::isLoggedIn()) {
+            header('Location: ../login.php');
+            exit;
+        }
+        
+        if (!self::hasRole($role)) {
             http_response_code(403);
-            die('Access denied');
+            die('Access denied. Insufficient permissions.');
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
-require_once 'models/ProductModel.php';
-require_once 'models/PointModel.php';
+require_once 'ProductModel.php';
+require_once 'PointModel.php';
 
 class OrderModel {
     private $db;
@@ -9,7 +9,75 @@ class OrderModel {
         $this->db = Database::getInstance();
     }
     
-    public function createOrder($user_id, $cart_items) {
+    public function createOrder($user_id, $product_id, $quantity = 1) {
+        try {
+            $this->db->beginTransaction();
+            
+            $productModel = new ProductModel();
+            $pointModel = new PointModel();
+            
+            // Get product details
+            $product = $productModel->getById($product_id);
+            if (!$product) {
+                throw new Exception('Product not found');
+            }
+            
+            if ($product['stock'] < $quantity) {
+                throw new Exception('Insufficient stock');
+            }
+            
+            $total_points = $product['point_price'] * $quantity;
+            
+            // Check user points
+            $user_points = $pointModel->getUserPoints($user_id);
+            if ($user_points['current_balance'] < $total_points) {
+                throw new Exception('Insufficient points');
+            }
+            
+            // Generate order number
+            $order_number = 'ORD' . date('Ymd') . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
+            
+            // Create order
+            $order_id = $this->db->insert('orders', [
+                'user_id' => $user_id,
+                'order_number' => $order_number,
+                'total_points' => $total_points,
+                'status' => 'completed'
+            ]);
+            
+            // Create order item
+            $this->db->insert('order_items', [
+                'order_id' => $order_id,
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+                'points_per_item' => $product['point_price'],
+                'total_points' => $total_points
+            ]);
+            
+            // Update product stock
+            $productModel->updateStock($product_id, $quantity);
+            
+            // Deduct points
+            $pointModel->deductPoints($user_id, $total_points, 'spent', $order_id, 'Purchase: ' . $product['name']);
+            
+            $this->db->commit();
+            
+            return [
+                'success' => true, 
+                'message' => 'Pembelian berhasil!',
+                'order_id' => $order_id,
+                'order_number' => $order_number
+            ];
+            
+        } catch (Exception $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function createOrderFromCart($user_id, $cart_items) {
         try {
             $productModel = new ProductModel();
             $pointModel = new PointModel();

@@ -519,3 +519,53 @@ Stack trace:
 [30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
 [30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint/admin/karyawan
 [30-Dec-2025 16:17:53 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint
+[09-Jan-2026 12:34:20 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint
+[09-Jan-2026 12:35:36 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint
+[09-Jan-2026 12:35:37 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/login
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/login
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/login
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint/login
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint/login
+[09-Jan-2026 12:46:41 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🚀 SANIPOINT System Starting - URI: /sanipoint/auth/login
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 📍 Script: /sanipoint/index.php
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 📁 Document Root: C:/xampp/htdocs
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🎯 Dispatching to: /sanipoint/auth/login
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🎯 Original URI: /sanipoint/auth/login
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🎯 Parsed path: /sanipoint/auth/login
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🗺️ Available routes: /, /landing, /auth/login, /auth/logout, /login, /logout, /admin/dashboard, /admin/karyawan, /admin/kamar-mandi, /admin/produk, /admin/sensor, /admin/transaksi, /admin/laporan, /admin/laporan/pdf, /admin/pengaturan, /karyawan/dashboard, /karyawan/poin, /karyawan/riwayat, /karyawan/marketplace, /karyawan/transfer, /karyawan/monitoring, /karyawan/pengaturan, /api/sensor-data, /api/rfid-tap, /api/realtime-status
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: ❌ No route found for: /sanipoint/auth/login
+[09-Jan-2026 12:46:52 Asia/Jakarta] SANIPOINT: 🚫 404 Error - Page not found

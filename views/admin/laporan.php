@@ -14,7 +14,7 @@ ob_start();
                 Refresh Data
             </button>
             <button id="download-pdf" class="btn btn-primary">
-                <i class="fas fa-download mr-2"></i>
+                <i class="fa-solid fa-download"></i>
                 Download PDF
             </button>
         </div>
@@ -134,7 +134,7 @@ ob_start();
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <?php if ($rank <= 3): ?>
-                                        <div class="w-8 h-8 rounded-full flex items-center justify-center <?= $rank == 1 ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400' : ($rank == 2 ? 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400' : 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400') ?>">
+                                        <div class="w-8 h-8 rounded-full flex items-center justify-center <?= $rank == 1 ? 'bg-yellow-100 dark:text-yellow-400' : ($rank == 2 ? 'bg-gray-100 dark:bg-gray-700 dark:text-gray-400' : 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400') ?>">
                                             <i class="fas fa-trophy text-sm"></i>
                                         </div>
                                     <?php else: ?>

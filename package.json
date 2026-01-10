@@ -1,13 +1,15 @@
 {
-  "name": "sanipoint-landing",
+  "name": "sanipoint",
   "version": "1.0.0",
-  "description": "SANIPOINT Landing Page Build System",
+  "description": "IoT Bathroom Monitoring System",
   "scripts": {
-    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --watch",
-    "build-prod": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --minify"
+    "build-css": "postcss assets/css/input.css -o assets/css/style.css --watch",
+    "build": "postcss assets/css/input.css -o assets/css/style.css"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0",
-    "autoprefixer": "^10.4.16"
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.3.6"
   }
 }

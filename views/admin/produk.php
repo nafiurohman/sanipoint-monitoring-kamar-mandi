@@ -75,7 +75,7 @@ ob_start();
 </div>
 
 <!-- Product Modal -->
-<div id="productModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+<div id="productModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center">
     <div class="bg-white rounded-lg p-6 w-full max-w-md">
         <h3 id="productModalTitle" class="text-lg font-semibold mb-4">Tambah Produk Baru</h3>
         <form id="productForm" method="POST">

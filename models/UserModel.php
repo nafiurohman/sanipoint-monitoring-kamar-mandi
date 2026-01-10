@@ -196,6 +196,7 @@ class UserModel {
     
     public function getEmployeePerformance() {
         $sql = "SELECT 
+                    u.id,
                     u.full_name,
                     u.employee_code,
                     COUNT(cl.id) as total_cleanings,
@@ -206,7 +207,7 @@ class UserModel {
                 LEFT JOIN cleaning_logs cl ON u.id = cl.user_id AND cl.status = 'completed'
                 LEFT JOIN points p ON u.id = p.user_id
                 WHERE u.role = 'karyawan' AND u.is_active = 1
-                GROUP BY u.id
+                GROUP BY u.id, u.full_name, u.employee_code, p.current_balance
                 ORDER BY total_cleanings DESC, total_points_earned DESC";
         return $this->db->fetchAll($sql);
     }
@@ -276,6 +277,20 @@ class UserModel {
         } catch (Exception $e) {
             error_log('PIN update exception: ' . $e->getMessage());
             return ['success' => false, 'message' => 'Failed to update PIN'];
+        }
+    }
+    
+    public function updateUserPin($id, $hashedPin) {
+        try {
+            $result = $this->db->update('users', [
+                'pin' => $hashedPin,
+                'pin_created_at' => date('Y-m-d H:i:s')
+            ], 'id = ?', [$id]);
+            
+            return $result;
+        } catch (Exception $e) {
+            error_log('PIN update exception: ' . $e->getMessage());
+            return false;
         }
     }
     

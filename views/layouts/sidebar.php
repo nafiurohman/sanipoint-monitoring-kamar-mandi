@@ -1,12 +1,11 @@
 <?php
 if (!class_exists('Auth')) {
-    require_once 'core/Auth.php';
+    require_once __DIR__ . '/../../core/Auth.php';
 }
-require_once 'config/config.php';
+require_once __DIR__ . '/../../config/config.php';
 
-$auth = new Auth();
-$user = $auth->getUser();
-$isAdmin = $auth->hasRole('admin');
+$user = Auth::getUser();
+$isAdmin = Auth::hasRole('admin');
 
 $currentPath = $_SERVER['REQUEST_URI'];
 ?>
@@ -41,31 +40,23 @@ $currentPath = $_SERVER['REQUEST_URI'];
         <?php if ($isAdmin): ?>
             <div class="nav-section">
                 <div class="nav-title">Admin Panel</div>
-                <a href="<?= APP_URL ?>admin/dashboard" class="nav-item <?= strpos($currentPath, '/admin/dashboard') !== false ? 'active' : '' ?>">
+                <a href="../admin/dashboard.php" class="nav-item <?= strpos($currentPath, '/admin/dashboard') !== false ? 'active' : '' ?>">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="<?= APP_URL ?>admin/karyawan" class="nav-item <?= strpos($currentPath, '/admin/karyawan') !== false ? 'active' : '' ?>">
+                <a href="../admin/karyawan.php" class="nav-item <?= strpos($currentPath, '/admin/karyawan') !== false ? 'active' : '' ?>">
                     <i class="fas fa-users"></i>
                     <span>Karyawan</span>
                 </a>
-                <a href="<?= APP_URL ?>admin/kamar-mandi" class="nav-item <?= strpos($currentPath, '/admin/kamar-mandi') !== false ? 'active' : '' ?>">
+                <a href="../admin/kamar_mandi.php" class="nav-item <?= strpos($currentPath, '/admin/kamar_mandi') !== false ? 'active' : '' ?>">
                     <i class="fas fa-restroom"></i>
                     <span>Kamar Mandi</span>
                 </a>
-                <a href="<?= APP_URL ?>admin/produk" class="nav-item <?= strpos($currentPath, '/admin/produk') !== false ? 'active' : '' ?>">
+                <a href="../admin/produk.php" class="nav-item <?= strpos($currentPath, '/admin/produk') !== false ? 'active' : '' ?>">
                     <i class="fas fa-box"></i>
                     <span>Produk</span>
                 </a>
-                <a href="<?= APP_URL ?>admin/sensor" class="nav-item <?= strpos($currentPath, '/admin/sensor') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-microchip"></i>
-                    <span>Sensor IoT</span>
-                </a>
-                <a href="<?= APP_URL ?>admin/transaksi" class="nav-item <?= strpos($currentPath, '/admin/transaksi') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-exchange-alt"></i>
-                    <span>Transaksi</span>
-                </a>
-                <a href="<?= APP_URL ?>admin/laporan" class="nav-item <?= strpos($currentPath, '/admin/laporan') !== false ? 'active' : '' ?>">
+                <a href="../admin/laporan.php" class="nav-item <?= strpos($currentPath, '/admin/laporan') !== false ? 'active' : '' ?>">
                     <i class="fas fa-chart-bar"></i>
                     <span>Laporan</span>
                 </a>
@@ -73,27 +64,23 @@ $currentPath = $_SERVER['REQUEST_URI'];
         <?php else: ?>
             <div class="nav-section">
                 <div class="nav-title">Menu Utama</div>
-                <a href="<?= APP_URL ?>karyawan/dashboard" class="nav-item <?= strpos($currentPath, '/karyawan/dashboard') !== false ? 'active' : '' ?>">
+                <a href="../karyawan/dashboard.php" class="nav-item <?= strpos($currentPath, '/karyawan/dashboard') !== false ? 'active' : '' ?>">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="<?= APP_URL ?>karyawan/poin" class="nav-item <?= strpos($currentPath, '/karyawan/poin') !== false ? 'active' : '' ?>">
-                    <i class="fas fa-coins"></i>
-                    <span>Poin Saya</span>
-                </a>
-                <a href="<?= APP_URL ?>karyawan/marketplace" class="nav-item <?= strpos($currentPath, '/karyawan/marketplace') !== false ? 'active' : '' ?>">
+                <a href="../karyawan/marketplace.php" class="nav-item <?= strpos($currentPath, '/karyawan/marketplace') !== false ? 'active' : '' ?>">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Marketplace</span>
                 </a>
-                <a href="<?= APP_URL ?>karyawan/transfer" class="nav-item <?= strpos($currentPath, '/karyawan/transfer') !== false ? 'active' : '' ?>">
+                <a href="../karyawan/transfer.php" class="nav-item <?= strpos($currentPath, '/karyawan/transfer') !== false ? 'active' : '' ?>">
                     <i class="fas fa-paper-plane"></i>
                     <span>Transfer Poin</span>
                 </a>
-                <a href="<?= APP_URL ?>karyawan/riwayat" class="nav-item <?= strpos($currentPath, '/karyawan/riwayat') !== false ? 'active' : '' ?>">
+                <a href="../karyawan/riwayat.php" class="nav-item <?= strpos($currentPath, '/karyawan/riwayat') !== false ? 'active' : '' ?>">
                     <i class="fas fa-history"></i>
                     <span>Riwayat</span>
                 </a>
-                <a href="<?= APP_URL ?>karyawan/monitoring" class="nav-item <?= strpos($currentPath, '/karyawan/monitoring') !== false ? 'active' : '' ?>">
+                <a href="../karyawan/monitoring.php" class="nav-item <?= strpos($currentPath, '/karyawan/monitoring') !== false ? 'active' : '' ?>">
                     <i class="fas fa-chart-line"></i>
                     <span>Monitoring</span>
                 </a>
@@ -102,11 +89,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
         
         <div class="nav-section">
             <div class="nav-title">Pengaturan</div>
-            <a href="<?= APP_URL ?><?= $isAdmin ? 'admin' : 'karyawan' ?>/profil" class="nav-item <?= strpos($currentPath, '/profil') !== false ? 'active' : '' ?>">
-                <i class="fas fa-user"></i>
-                <span>Profil</span>
-            </a>
-            <a href="<?= APP_URL ?><?= $isAdmin ? 'admin' : 'karyawan' ?>/pengaturan" class="nav-item <?= strpos($currentPath, '/pengaturan') !== false ? 'active' : '' ?>">
+            <a href="../karyawan/pengaturan.php" class="nav-item <?= strpos($currentPath, '/pengaturan') !== false ? 'active' : '' ?>">
                 <i class="fas fa-cog"></i>
                 <span>Pengaturan</span>
             </a>
@@ -114,7 +97,7 @@ $currentPath = $_SERVER['REQUEST_URI'];
                 <i id="theme-icon" class="fas fa-moon"></i>
                 <span class="sidebar-text">Mode Gelap</span>
             </button>
-            <a href="<?= APP_URL ?>logout" class="nav-item logout">
+            <a href="../logout.php" class="nav-item logout">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>

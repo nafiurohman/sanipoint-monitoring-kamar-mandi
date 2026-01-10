@@ -23,7 +23,10 @@ class PointModel {
     
     public function addPoints($user_id, $amount, $reference_type, $reference_id = null, $description = null) {
         try {
-            $this->db->getConnection()->beginTransaction();
+            $needTransaction = !$this->db->inTransaction();
+            if ($needTransaction) {
+                $this->db->beginTransaction();
+            }
             
             $points = $this->getUserPoints($user_id);
             $new_balance = $points['current_balance'] + $amount;
@@ -46,18 +49,25 @@ class PointModel {
                 'description' => $description
             ]);
             
-            $this->db->getConnection()->commit();
+            if ($needTransaction) {
+                $this->db->commit();
+            }
             return ['success' => true, 'new_balance' => $new_balance];
             
         } catch (Exception $e) {
-            $this->db->getConnection()->rollBack();
-            return ['success' => false, 'message' => 'Failed to add points'];
+            if ($needTransaction && $this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            return ['success' => false, 'message' => 'Failed to add points: ' . $e->getMessage()];
         }
     }
     
     public function deductPoints($user_id, $amount, $reference_type, $reference_id = null, $description = null) {
         try {
-            $this->db->getConnection()->beginTransaction();
+            $needTransaction = !$this->db->inTransaction();
+            if ($needTransaction) {
+                $this->db->beginTransaction();
+            }
             
             $points = $this->getUserPoints($user_id);
             if ($points['current_balance'] < $amount) {
@@ -84,11 +94,15 @@ class PointModel {
                 'description' => $description
             ]);
             
-            $this->db->getConnection()->commit();
+            if ($needTransaction) {
+                $this->db->commit();
+            }
             return ['success' => true, 'new_balance' => $new_balance];
             
         } catch (Exception $e) {
-            $this->db->getConnection()->rollBack();
+            if ($needTransaction && $this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
@@ -107,13 +121,23 @@ class PointModel {
                 throw new Exception('Cannot transfer to yourself');
             }
             
-            // Check sender balance
-            $from_points = $this->getUserPoints($from_user_id);
-            if ($from_points['current_balance'] < $amount) {
+            // Check sender balance with row locking
+            $from_points = $this->db->fetch("SELECT * FROM points WHERE user_id = ? FOR UPDATE", [$from_user_id]);
+            if (!$from_points || $from_points['current_balance'] < $amount) {
                 throw new Exception('Insufficient points');
             }
             
-            $to_points = $this->getUserPoints($to_user_id);
+            $to_points = $this->db->fetch("SELECT * FROM points WHERE user_id = ? FOR UPDATE", [$to_user_id]);
+            if (!$to_points) {
+                // Initialize points for recipient if not exists
+                $this->db->insert('points', [
+                    'user_id' => $to_user_id,
+                    'current_balance' => 0,
+                    'total_earned' => 0,
+                    'total_spent' => 0
+                ]);
+                $to_points = ['current_balance' => 0, 'total_earned' => 0, 'total_spent' => 0];
+            }
             
             // Update sender
             $new_from_balance = $from_points['current_balance'] - $amount;
@@ -208,6 +232,97 @@ class PointModel {
         return $this->db->fetch($sql, [$user_id]);
     }
     
+    public function getPointStats() {
+        $stats = [];
+        
+        // Total points distributed
+        $result = $this->db->fetch("SELECT COALESCE(SUM(amount), 0) as total FROM point_transactions WHERE transaction_type = 'earned'");
+        $stats['total_distributed'] = $result ? $result['total'] : 0;
+        
+        // Total points spent
+        $result = $this->db->fetch("SELECT COALESCE(SUM(amount), 0) as total FROM point_transactions WHERE transaction_type = 'spent'");
+        $stats['total_spent'] = $result ? $result['total'] : 0;
+        
+        // Points distributed today
+        $result = $this->db->fetch("SELECT COALESCE(SUM(amount), 0) as total FROM point_transactions WHERE transaction_type = 'earned' AND DATE(created_at) = CURDATE()");
+        $stats['today_distributed'] = $result ? $result['total'] : 0;
+        
+        return $stats;
+    }
+    
+    public function recalculateUserPoints($user_id) {
+        try {
+            $this->db->getConnection()->beginTransaction();
+            
+            // Calculate from point_transactions
+            $earned = $this->db->fetch(
+                "SELECT COALESCE(SUM(amount), 0) as total FROM point_transactions WHERE user_id = ? AND transaction_type IN ('earned', 'transfer_in')",
+                [$user_id]
+            );
+            $spent = $this->db->fetch(
+                "SELECT COALESCE(SUM(amount), 0) as total FROM point_transactions WHERE user_id = ? AND transaction_type IN ('spent', 'transfer_out')",
+                [$user_id]
+            );
+            
+            $total_earned = $earned['total'] ?? 0;
+            $total_spent = $spent['total'] ?? 0;
+            $current_balance = $total_earned - $total_spent;
+            
+            // Update or insert points record
+            $existing = $this->db->fetch("SELECT * FROM points WHERE user_id = ?", [$user_id]);
+            
+            if ($existing) {
+                $this->db->update('points', [
+                    'current_balance' => $current_balance,
+                    'total_earned' => $total_earned,
+                    'total_spent' => $total_spent,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ], 'user_id = ?', [$user_id]);
+            } else {
+                $this->db->insert('points', [
+                    'user_id' => $user_id,
+                    'current_balance' => $current_balance,
+                    'total_earned' => $total_earned,
+                    'total_spent' => $total_spent
+                ]);
+            }
+            
+            $this->db->getConnection()->commit();
+            return [
+                'success' => true, 
+                'current_balance' => $current_balance,
+                'total_earned' => $total_earned,
+                'total_spent' => $total_spent
+            ];
+            
+        } catch (Exception $e) {
+            $this->db->getConnection()->rollBack();
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function recalculateAllUserPoints() {
+        try {
+            // Get all users who have transactions
+            $users = $this->db->fetchAll(
+                "SELECT DISTINCT user_id FROM point_transactions 
+                 UNION 
+                 SELECT DISTINCT id as user_id FROM users WHERE role = 'karyawan'"
+            );
+            
+            $results = [];
+            foreach ($users as $user) {
+                $result = $this->recalculateUserPoints($user['user_id']);
+                $results[$user['user_id']] = $result;
+            }
+            
+            return ['success' => true, 'results' => $results];
+            
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+    
     public function getCleaningHistory($user_id) {
         $sql = "SELECT cl.*, b.name as bathroom_name
                 FROM cleaning_logs cl
@@ -217,4 +332,3 @@ class PointModel {
         return $this->db->fetchAll($sql, [$user_id]);
     }
 }
-?>
